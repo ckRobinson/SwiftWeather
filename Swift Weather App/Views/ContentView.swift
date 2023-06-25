@@ -19,7 +19,7 @@ struct ContentView: View {
                 
                 VStack {
                     if let weatherData = viewModel.weatherData {
-                        WeatherContent(weatherData: weatherData)
+                        LocationCurrentWeatherCardView(weatherData: weatherData)
                             .padding(.horizontal)
                             .padding(.top)
                             .padding(.bottom, 3)
@@ -36,73 +36,6 @@ struct ContentView: View {
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
         }
-    }
-}
-
-struct WeatherContent: View {
-    
-    let weatherData: WeatherData
-    init() {
-        self.weatherData = WeatherData(originalData: WeatherModel.mockData);
-    }
-    init(weatherData: WeatherData) {
-        self.weatherData = weatherData;
-    }
-    
-    var body: some View {
-        VStack {
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(weatherData.coreData.name)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                    Text("\(weatherData.time)")
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                }
-                .padding(.leading)
-                
-                Spacer()
-                
-                Text("\(String(format: "%.2f", weatherData.coreData.main.temp))\u{00B0}")
-                    .font(.system(size: 15))
-                    .foregroundColor(.white)
-                    .padding(.trailing)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top)
-
-            
-            HStack {
-                Text(weatherData.coreData.weather[0].description.capitalized)
-                    .font(.system(size: 12))
-                    .foregroundColor(.white)
-                    .padding(.leading)
-                Image(systemName: weatherData.weatherImage)
-                    .renderingMode(.original)
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                
-                Spacer()
-                
-                HStack {
-                    Text("H: \(String(format: "%.2f", weatherData.coreData.main.temp_max))\u{00B0}")
-                        .font(.system(size: 12).bold())
-                        .foregroundColor(.white)
-                    
-                    Text("L: \(String(format: "%.2f", weatherData.coreData.main.temp_min))\u{00B0}")
-                        .font(.system(size: 12).bold())
-                        .foregroundColor(.white)
-                }
-                .padding(.trailing)
-            }
-            .padding(.bottom)
-            
-        }
-        .background(.blue)
-        .cornerRadius(15)
-        .shadow(radius: 1, x: 1, y: 1)
     }
 }
 
