@@ -37,10 +37,11 @@ class WeatherFetchService {
         static let latitude = "lat=37.7652"
         static let longitude = "&lon=-122.2416"
         static let apiKey = "&appid=db9a10cd3dd4f0934a3d1d9e7fff30f7"
+        static let units = "&units=imperial"
         
         static func getURL() -> String {
             
-            return "\(weatherApiUrl)\(latitude)\(longitude)\(apiKey)"
+            return "\(weatherApiUrl)\(latitude)\(longitude)\(units)\(apiKey)"
         }
     }
     
@@ -55,9 +56,9 @@ class WeatherFetchService {
             print("Got response status \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
             throw APIError.invalidResponse
         }
-        if let responseStr = String(data: data, encoding: .utf8) {
-            print(responseStr)
-        }
+//        if let responseStr = String(data: data, encoding: .utf8) {
+//            print(responseStr)
+//        }
         return try JSONDecoder().decode(WeatherModel.self, from: data)
     }
 }
