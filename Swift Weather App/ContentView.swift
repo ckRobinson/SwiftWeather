@@ -29,9 +29,12 @@ struct ContentView: View {
             }
             .navigationTitle("Weather")
         }
-        .searchable(text: $searchText, prompt: "Search for a city/state")
         .onAppear() {
             viewModel.updateWeatherData()
+        }
+        .searchable(text: $searchText, prompt: "Search for a city/state")
+        .onSubmit(of: .search) {
+            viewModel.fetchWeatherBy(search: searchText)
         }
     }
 }
