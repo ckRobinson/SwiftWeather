@@ -19,6 +19,7 @@
 		7E0E90CF2A48A4CD001C8ACC /* WeatherDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E90CE2A48A4CD001C8ACC /* WeatherDataViewModel.swift */; };
 		7E1D050D2A48C3C900ED114F /* GeoLocationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D050C2A48C3C900ED114F /* GeoLocationDataModel.swift */; };
 		7E1D05112A48CC4100ED114F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05102A48CC4100ED114F /* BackgroundView.swift */; };
+		7E1D05152A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		7E0E90CE2A48A4CD001C8ACC /* WeatherDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataViewModel.swift; sourceTree = "<group>"; };
 		7E1D050C2A48C3C900ED114F /* GeoLocationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationDataModel.swift; sourceTree = "<group>"; };
 		7E1D05102A48CC4100ED114F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCurrentWeatherCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		7E1D050E2A48CC1300ED114F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E1D05132A48CE8400ED114F /* CurrentWeatherView */,
 				7E1D050F2A48CC2D00ED114F /* SharedViews */,
 				7E0E909F2A489E85001C8ACC /* ContentView.swift */,
 			);
@@ -180,6 +183,14 @@
 				7E1D05102A48CC4100ED114F /* BackgroundView.swift */,
 			);
 			path = SharedViews;
+			sourceTree = "<group>";
+		};
+		7E1D05132A48CE8400ED114F /* CurrentWeatherView */ = {
+			isa = PBXGroup;
+			children = (
+				7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */,
+			);
+			path = CurrentWeatherView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1D05152A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift in Sources */,
 				7E0E90A02A489E85001C8ACC /* ContentView.swift in Sources */,
 				7E0E909E2A489E85001C8ACC /* Swift_Weather_AppApp.swift in Sources */,
 				7E1D050D2A48C3C900ED114F /* GeoLocationDataModel.swift in Sources */,
