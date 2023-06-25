@@ -55,6 +55,9 @@ class WeatherFetchService {
             print("Got response status \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
             throw APIError.invalidResponse
         }
+        if let responseStr = String(data: data, encoding: .utf8) {
+            print(responseStr)
+        }
         return try JSONDecoder().decode(WeatherModel.self, from: data)
     }
 }
