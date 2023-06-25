@@ -62,7 +62,7 @@ struct WeatherContent: View {
                 
                 Spacer()
                 
-                Text("\(String(format: "%.2f", weatherData.coreData.main.temp))")
+                Text("\(String(format: "%.2f", weatherData.coreData.main.temp))\u{00B0}")
                     .font(.system(size: 15))
                     .foregroundColor(.white)
                     .padding(.trailing)
@@ -86,9 +86,11 @@ struct WeatherContent: View {
                 HStack {
                     Text("H: \(String(format: "%.2f", weatherData.coreData.main.temp_max))\u{00B0}")
                         .font(.system(size: 12).bold())
+                        .foregroundColor(.white)
                     
                     Text("L: \(String(format: "%.2f", weatherData.coreData.main.temp_min))\u{00B0}")
                         .font(.system(size: 12).bold())
+                        .foregroundColor(.white)
                 }
                 .padding(.trailing)
             }
