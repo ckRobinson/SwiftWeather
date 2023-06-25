@@ -16,6 +16,7 @@
 		7E0E90BB2A489E87001C8ACC /* Swift_Weather_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E90BA2A489E87001C8ACC /* Swift_Weather_AppUITestsLaunchTests.swift */; };
 		7E0E90C92A489FBD001C8ACC /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E90C82A489FBD001C8ACC /* CurrentWeatherModel.swift */; };
 		7E0E90CC2A48A270001C8ACC /* WeatherFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E90CB2A48A270001C8ACC /* WeatherFetchService.swift */; };
+		7E0E90CF2A48A4CD001C8ACC /* WeatherDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E90CE2A48A4CD001C8ACC /* WeatherDataViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		7E0E90BA2A489E87001C8ACC /* Swift_Weather_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Weather_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7E0E90C82A489FBD001C8ACC /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
 		7E0E90CB2A48A270001C8ACC /* WeatherFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFetchService.swift; sourceTree = "<group>"; };
+		7E0E90CE2A48A4CD001C8ACC /* WeatherDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,7 @@
 		7E0E909C2A489E85001C8ACC /* Swift Weather App */ = {
 			isa = PBXGroup;
 			children = (
-				7E0E90CD2A48A45C001C8ACC /* New Group */,
+				7E0E90CD2A48A45C001C8ACC /* ViewModel */,
 				7E0E90CA2A48A25C001C8ACC /* Networking */,
 				7E0E90C72A489E8F001C8ACC /* Model */,
 				7E0E909D2A489E85001C8ACC /* Swift_Weather_AppApp.swift */,
@@ -150,11 +152,12 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		7E0E90CD2A48A45C001C8ACC /* New Group */ = {
+		7E0E90CD2A48A45C001C8ACC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7E0E90CE2A48A4CD001C8ACC /* WeatherDataViewModel.swift */,
 			);
-			path = "New Group";
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +293,7 @@
 				7E0E90A02A489E85001C8ACC /* ContentView.swift in Sources */,
 				7E0E909E2A489E85001C8ACC /* Swift_Weather_AppApp.swift in Sources */,
 				7E0E90C92A489FBD001C8ACC /* CurrentWeatherModel.swift in Sources */,
+				7E0E90CF2A48A4CD001C8ACC /* WeatherDataViewModel.swift in Sources */,
 				7E0E90CC2A48A270001C8ACC /* WeatherFetchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
