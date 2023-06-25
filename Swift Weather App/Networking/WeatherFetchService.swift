@@ -30,29 +30,36 @@ enum APIError: Error {
     }
 }
 
-class WeatherFetchService {
+struct Constants {
+    static let apiKey = "db9a10cd3dd4f0934a3d1d9e7fff30f7"
+    static let weatherLonLatApi_BaseUrl = "https://api.openweathermap.org/data/2.5/weather?"
+    static let weatherGeoLocApi_BaseUrl = "https://api.openweathermap.org/geo/1.0/direct?"
+}
+
+class APIManager {
+    static let latitude = "lat="
+    static let longitude = "&lon="
+    static let apiKey = "&appid=\(Constants.apiKey)"
+    static let units = "&units=imperial"
     
-    struct Constants {
-        static let weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?"
-        static let latitude = "lat="
-        static let longitude = "&lon="
-        static let apiKey = "&appid=db9a10cd3dd4f0934a3d1d9e7fff30f7"
-        static let units = "&units=imperial"
+    static func getLonLatAPIUrl(lat: Float, lon: Float) -> String {
         
-        static func getURL(lat: Float, lon: Float) -> String {
-            
-            return "\(weatherApiUrl)\(latitude)\(lat)\(longitude)\(lon)\(units)\(apiKey)"
-        }
-        
-        static func getSearchGeoLocationURL(searchText: String) -> String {
-            
-            let encodedSearchText = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            let apiURLString = "https://api.openweathermap.org/geo/1.0/direct?q=\(encodedSearchText)&limit=1\(apiKey)"
-            print(apiURLString);
-            
-            return apiURLString;
-        }
+        let apiURLString = "\(Constants.weatherLonLatApi_BaseUrl)\(latitude)\(lat)\(longitude)\(lon)\(units)\(apiKey)"
+        print(apiURLString);
+        return apiURLString
     }
+    
+    static func getSearchGeoLocationURL(searchText: String) -> String {
+        
+        let encodedSearchText = "\(searchText),us".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let apiURLString = "\(Constants.weatherGeoLocApi_BaseUrl)q=\(encodedSearchText)&limit=1\(apiKey)"
+        print(apiURLString);
+        
+        return apiURLString;
+    }
+}
+
+class WeatherFetchService {
     
     public func fetchWeatherBy(search: String) async throws -> WeatherModel {
         
@@ -66,7 +73,7 @@ class WeatherFetchService {
     
     public func fetchWeatherBy(lat: Float, lon: Float) async throws -> WeatherModel {
         
-        guard let url = URL(string: Constants.getURL(lat: lat, lon: lon)) else {
+        guard let url = URL(string: APIManager.getLonLatAPIUrl(lat: lat, lon: lon)) else {
             throw APIError.invalidUrl
         }
         let (data, response) = try await URLSession.shared.data(from: url);
@@ -83,7 +90,7 @@ class WeatherFetchService {
 
     private func fetchGeoLocation(search: String) async throws -> [GeoLocationDataModel] {
         
-        guard let url = URL(string: Constants.getSearchGeoLocationURL(searchText: search)) else {
+        guard let url = URL(string: APIManager.getSearchGeoLocationURL(searchText: search)) else {
             throw APIError.invalidUrl
         }
         let (data, response) = try await URLSession.shared.data(from: url);
