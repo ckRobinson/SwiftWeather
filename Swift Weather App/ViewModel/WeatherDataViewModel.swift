@@ -7,18 +7,35 @@
 
 import Foundation
 
+struct WeatherData {
+    let coreData: WeatherModel
+    let time: String;
+    var weatherImage: String = "sun.fill"
+    
+    init(originalData: WeatherModel) {
+        self.coreData = originalData;
+        
+        let date = Date(timeIntervalSince1970: Double(self.coreData.dt))
+        let formattedTime = date.formatted(Date.FormatStyle()
+            .hour(.defaultDigits(amPM: .abbreviated))
+            .minute(.twoDigits))
+        self.time = "\(formattedTime)";
+    }
+}
+
 class WeatherDataViewModel: ObservableObject {
     
-    @Published var weatherData: WeatherModel?;
+    @Published var weatherData: WeatherData?;
+    @Published var time: String = "";
+    
     let weatherDataService: WeatherFetchService = WeatherFetchService();
     
     @MainActor func updateWeatherData() {
         
         Task {
             do {
-                let weatherData: WeatherModel = try await weatherDataService.fetchWeather()
-                self.weatherData = weatherData;
-                print(weatherData);
+                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeather()
+                self.weatherData = WeatherData(originalData: weatherDataModel);
             }
             catch {
                 if let error = error as? APIError {
