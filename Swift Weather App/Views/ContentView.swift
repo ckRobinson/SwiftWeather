@@ -106,15 +106,6 @@ struct WeatherContent: View {
     }
 }
 
-struct WeatherBackgroundView: View {
-    
-    var body: some View {
-        LinearGradient(colors: [.teal, .blue, .init(red: 0.2, green: 0.2, blue: 1)],
-                       startPoint: .topLeading, endPoint: .bottomTrailing)
-        .ignoresSafeArea(.all)
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
