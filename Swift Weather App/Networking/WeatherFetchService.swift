@@ -45,7 +45,7 @@ class APIManager {
     static func getLonLatAPIUrl(lat: Float, lon: Float) -> String {
         
         let apiURLString = "\(Constants.weatherLonLatApi_BaseUrl)\(latitude)\(lat)\(longitude)\(lon)\(units)\(apiKey)"
-        print(apiURLString);
+//        print(apiURLString);
         return apiURLString
     }
     
@@ -53,8 +53,7 @@ class APIManager {
         
         let encodedSearchText = "\(searchText),us".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let apiURLString = "\(Constants.weatherGeoLocApi_BaseUrl)q=\(encodedSearchText)&limit=1\(apiKey)"
-        print(apiURLString);
-        
+//        print(apiURLString);
         return apiURLString;
     }
 }
