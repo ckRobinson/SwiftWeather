@@ -43,9 +43,28 @@ class WeatherFetchService {
             
             return "\(weatherApiUrl)\(latitude)\(lat)\(longitude)\(lon)\(units)\(apiKey)"
         }
+        
+        static func getSearchGeoLocationURL(searchText: String) -> String {
+            
+            let encodedSearchText = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let apiURLString = "https://api.openweathermap.org/geo/1.0/direct?q=\(encodedSearchText)&limit=1\(apiKey)"
+            print(apiURLString);
+            
+            return apiURLString;
+        }
     }
     
-    public func fetchWeather(lat: Float, lon: Float) async throws -> WeatherModel {
+    public func fetchWeatherBy(search: String) async throws -> WeatherModel {
+        
+        let locations = try await fetchGeoLocation(search: search);
+        if(locations.count == 0) {
+            throw APIError.decodingError
+        }
+        
+        return try await fetchWeatherBy(lat: locations[0].lat, lon: locations[0].lon);
+    }
+    
+    public func fetchWeatherBy(lat: Float, lon: Float) async throws -> WeatherModel {
         
         guard let url = URL(string: Constants.getURL(lat: lat, lon: lon)) else {
             throw APIError.invalidUrl
@@ -60,5 +79,22 @@ class WeatherFetchService {
 //            print(responseStr)
 //        }
         return try JSONDecoder().decode(WeatherModel.self, from: data)
+    }
+
+    private func fetchGeoLocation(search: String) async throws -> [GeoLocationDataModel] {
+        
+        guard let url = URL(string: Constants.getSearchGeoLocationURL(searchText: search)) else {
+            throw APIError.invalidUrl
+        }
+        let (data, response) = try await URLSession.shared.data(from: url);
+        guard let resp = response as? HTTPURLResponse,
+              resp.statusCode == 200 else {
+            print("Got response status \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+            throw APIError.invalidResponse
+        }
+//        if let responseStr = String(data: data, encoding: .utf8) {
+//            print("Got Geo Location Response: \(responseStr)");
+//        }
+        return try JSONDecoder().decode([GeoLocationDataModel].self, from: data)
     }
 }
