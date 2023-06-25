@@ -10,7 +10,7 @@ import Foundation
 struct WeatherData {
     let coreData: WeatherModel
     let time: String;
-    var weatherImage: String = "sun.fill"
+    var weatherImage: String = "sun.max.fill"
     
     init(originalData: WeatherModel) {
         self.coreData = originalData;
@@ -29,12 +29,12 @@ class WeatherDataViewModel: ObservableObject {
     @Published var time: String = "";
     
     let weatherDataService: WeatherFetchService = WeatherFetchService();
-    
-    @MainActor func updateWeatherData() {
+
+    @MainActor func updateWeatherData(lat: Float, lon: Float) {
         
         Task {
             do {
-                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeather()
+                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeather(lat: lat, lon: lon)
                 self.weatherData = WeatherData(originalData: weatherDataModel);
             }
             catch {
