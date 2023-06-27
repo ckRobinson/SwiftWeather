@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherModel.swift
+//  CurrentWeatherApiModel.swift
 //  Swift Weather App
 //
 //  Created by Cameron on 6/25/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherModel: Codable {
+struct WeatherApiDataModel: Codable {
     let coord: Coord;
     let weather: [Weather];
     let main: MainWeather;
@@ -21,7 +21,7 @@ struct WeatherModel: Codable {
     let name: String;
     let cod: Int;
     
-    static let mockData = WeatherModel(coord: .mockData,
+    static let mockData = WeatherApiDataModel(coord: .mockData,
                                        weather: Weather.mockData,
                                        main: .mockData,
                                        visibility: 10000,

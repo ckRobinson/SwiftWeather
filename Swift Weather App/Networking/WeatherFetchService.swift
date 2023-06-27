@@ -60,7 +60,7 @@ class APIManager {
 
 class WeatherFetchService {
     
-    public func fetchWeatherBy(search: String) async throws -> WeatherModel {
+    public func fetchWeatherBy(search: String) async throws -> WeatherApiDataModel {
         
         let locations = try await fetchGeoLocation(search: search);
         if(locations.count == 0) {
@@ -70,7 +70,7 @@ class WeatherFetchService {
         return try await fetchWeatherBy(lat: locations[0].lat, lon: locations[0].lon);
     }
     
-    public func fetchWeatherBy(lat: Float, lon: Float) async throws -> WeatherModel {
+    public func fetchWeatherBy(lat: Float, lon: Float) async throws -> WeatherApiDataModel {
         
         guard let url = URL(string: APIManager.getLonLatAPIUrl(lat: lat, lon: lon)) else {
             throw APIError.invalidUrl
@@ -84,7 +84,7 @@ class WeatherFetchService {
 //        if let responseStr = String(data: data, encoding: .utf8) {
 //            print(responseStr)
 //        }
-        return try JSONDecoder().decode(WeatherModel.self, from: data)
+        return try JSONDecoder().decode(WeatherApiDataModel.self, from: data)
     }
 
     private func fetchGeoLocation(search: String) async throws -> [GeoLocationDataModel] {

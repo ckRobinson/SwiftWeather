@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationCurrentWeatherCardView: View {
     let weatherData: WeatherData
     init() {
-        self.weatherData = WeatherData(originalData: WeatherModel.mockData);
+        self.weatherData = WeatherData(originalData: WeatherApiDataModel.mockData);
     }
     init(weatherData: WeatherData) {
         self.weatherData = weatherData;

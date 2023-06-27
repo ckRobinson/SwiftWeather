@@ -8,11 +8,11 @@
 import Foundation
 
 struct WeatherData {
-    let coreData: WeatherModel
+    let coreData: WeatherApiDataModel
     let time: String;
     var weatherImage: String = "sun.max.fill"
     
-    init(originalData: WeatherModel) {
+    init(originalData: WeatherApiDataModel) {
         self.coreData = originalData;
         
         let date = Date(timeIntervalSince1970: Double(self.coreData.dt))
@@ -33,7 +33,7 @@ class WeatherDataViewModel: ObservableObject {
     @MainActor func fetchWeatherBy(search: String) {
         Task {
             do {
-                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeatherBy(search: search)
+                let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(search: search)
                 self.weatherData = WeatherData(originalData: weatherDataModel);
             }
             catch {
@@ -52,7 +52,7 @@ class WeatherDataViewModel: ObservableObject {
         
         Task {
             do {
-                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeatherBy(lat: 37.7652, lon: -122.2416)
+                let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: 37.7652, lon: -122.2416)
                 self.weatherData = WeatherData(originalData: weatherDataModel);
             }
             catch {
@@ -70,7 +70,7 @@ class WeatherDataViewModel: ObservableObject {
         
         Task {
             do {
-                let weatherDataModel: WeatherModel = try await weatherDataService.fetchWeatherBy(lat: lat, lon: lon)
+                let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: lat, lon: lon)
                 self.weatherData = WeatherData(originalData: weatherDataModel);
             }
             catch {
