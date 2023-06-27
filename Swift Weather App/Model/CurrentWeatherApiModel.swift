@@ -19,7 +19,6 @@ struct WeatherApiDataModel: Codable {
     let timezone: Int
     let id: Int;
     let name: String;
-    let cod: Int;
     
     static let mockData = WeatherApiDataModel(coord: .mockData,
                                        weather: Weather.mockData,
@@ -31,8 +30,7 @@ struct WeatherApiDataModel: Codable {
                                        sys: .mockData,
                                        timezone: -25200,
                                        id: 5322737,
-                                       name: "Alameda",
-                                       cod: 200)
+                                       name: "Alameda")
 }
 
 struct Coord: Codable {

@@ -10,7 +10,7 @@ import Foundation
 
 class WeatherDataViewModel: ObservableObject {
     
-    @Published var weatherData: WeatherData?;
+    @Published var weatherData: LocationCurrentWeatherData?;
     @Published var time: String = "";
     
     let weatherDataService: WeatherFetchService = WeatherFetchService();
@@ -19,7 +19,7 @@ class WeatherDataViewModel: ObservableObject {
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(search: search)
-                self.weatherData = WeatherData(originalData: weatherDataModel);
+                self.weatherData = LocationCurrentWeatherData(rawData: weatherDataModel);
             }
             catch {
                 if let error = error as? APIError {
@@ -38,7 +38,7 @@ class WeatherDataViewModel: ObservableObject {
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: 37.7652, lon: -122.2416)
-                self.weatherData = WeatherData(originalData: weatherDataModel);
+                self.weatherData = LocationCurrentWeatherData(rawData: weatherDataModel);
             }
             catch {
                 if let error = error as? APIError {
@@ -56,7 +56,7 @@ class WeatherDataViewModel: ObservableObject {
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: lat, lon: lon)
-                self.weatherData = WeatherData(originalData: weatherDataModel);
+                self.weatherData = LocationCurrentWeatherData(rawData: weatherDataModel);
             }
             catch {
                 if let error = error as? APIError {
