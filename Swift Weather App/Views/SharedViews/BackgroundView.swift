@@ -44,7 +44,58 @@ struct WeatherBackgroundView: View {
 }
 
 struct BackgroundView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        WeatherBackgroundView(backgroundState: .evening)
+        Preview()
+    }
+}
+
+/// Wrapper struct to hold the state var and the buttons to swap. Can not seem to do this directly in the
+/// preview provider.
+private struct Preview: View {
+    
+    @State var backgroundState: BackgroundState = .day
+    var body: some View {
+        ZStack {
+            WeatherBackgroundView(backgroundState: self.backgroundState)
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Button(action: { backgroundState = .morning }, label: {
+                        Group {
+                            Text("Morning")
+                        }
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(15)
+                    })
+                    Button(action: { backgroundState = .day }, label: {
+                        Group {
+                            Text("Day")
+                        }
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(15)
+                    })
+                    Button(action: { backgroundState = .evening }, label: {
+                        Group {
+                            Text("Evening")
+                        }
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(15)
+                    })
+                    Button(action: { backgroundState = .night }, label: {
+                        Group {
+                            Text("Night")
+                        }
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(15)
+                    })
+                }
+            }
+        }
     }
 }
