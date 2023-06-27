@@ -18,23 +18,20 @@ struct LocationCurrentWeatherCardView: View {
     
     var body: some View {
         VStack {
-            
             HStack {
                 locationInfo
                 Spacer()
                 locationCurrentTemp
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top)
 
-            
             HStack {
                 locationCurrentWeatherDescription
                 Spacer()
                 locationCurrentHighLowTemp
             }
-            .padding(.bottom)
         }
+        .padding()
         .background(.blue)
         .cornerRadius(15)
         .shadow(radius: 1, x: 1, y: 1)
@@ -43,20 +40,18 @@ struct LocationCurrentWeatherCardView: View {
     var locationInfo: some View {
         VStack(alignment: .leading) {
             Text(weatherData.locationName)
-                .font(.system(size: 15))
+                .font(.system(size: 18).bold())
                 .foregroundColor(.white)
             Text("\(weatherData.localTime)")
                 .font(.system(size: 15))
                 .foregroundColor(.white)
         }
-        .padding(.leading)
     }
     
     var locationCurrentTemp: some View {
         Text("\(String(format: "%.2f", weatherData.currentTemp))\u{00B0}")
-            .font(.system(size: 15))
+            .font(.system(size: 20).bold())
             .foregroundColor(.white)
-            .padding(.trailing)
     }
     
     var locationCurrentWeatherDescription: some View {
@@ -64,7 +59,6 @@ struct LocationCurrentWeatherCardView: View {
             Text(weatherData.dayWeatherDescription)
                 .font(.system(size: 12))
                 .foregroundColor(.white)
-                .padding(.leading)
             Image(systemName: weatherData.weatherIconName)
                 .renderingMode(.original)
                 .resizable()
@@ -82,7 +76,6 @@ struct LocationCurrentWeatherCardView: View {
                 .font(.system(size: 12).bold())
                 .foregroundColor(.white)
         }
-        .padding(.trailing)
     }
 }
 
