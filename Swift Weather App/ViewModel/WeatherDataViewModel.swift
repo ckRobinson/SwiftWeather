@@ -11,9 +11,12 @@ import Foundation
 class WeatherDataViewModel: ObservableObject {
     
     @Published var weatherData: LocationCurrentWeatherData?;
-    @Published var time: String = "";
-    
+    @Published var timeBackgroundState: BackgroundState = .day;
     let weatherDataService: WeatherFetchService = WeatherFetchService();
+    
+    init() {
+        self.timeBackgroundState = parseDateToBackgroundState(date: Date())
+    }
 
     @MainActor func fetchWeatherBy(search: String) {
         Task {
