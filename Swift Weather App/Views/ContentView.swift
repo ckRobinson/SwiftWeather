@@ -15,7 +15,7 @@ struct ContentView: View {
         
         NavigationStack {
             ZStack {
-                WeatherBackgroundView()
+                WeatherBackgroundView(backgroundState: viewModel.timeBasedBackgroundState)
                 
                 VStack {
                     if let weatherData = viewModel.weatherData {
@@ -36,6 +36,8 @@ struct ContentView: View {
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
         }
+        /// Searchable tutorial:
+        /// https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-a-search-bar-to-filter-your-data
     }
 }
 

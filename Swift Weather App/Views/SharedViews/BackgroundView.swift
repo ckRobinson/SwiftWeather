@@ -7,35 +7,36 @@
 
 import SwiftUI
 
-enum BackgroundColorState {
-    case defaultDay;
-    case sunSet;
-    case night;
-}
-
 struct WeatherBackgroundView: View {
     
-    let backgroundState: BackgroundColorState
+    let backgroundState: BackgroundState
+    let lightPurple = Color.init(red: 0.1, green: 0.1, blue: 0.5)
+    let lightBlue = Color.init(red: 0.3, green: 0.5, blue: 1)
+    let lightFadedBlue = Color.init(red: 0.3, green: 0.5, blue: 1)
     init() {
-        self.backgroundState = .defaultDay
+        self.backgroundState = .day
     }
-    init(backgroundState: BackgroundColorState) {
+    init(backgroundState: BackgroundState) {
         self.backgroundState = backgroundState;
     }
     
     var body: some View {
         
         switch(self.backgroundState) {
-        case .defaultDay:
-            LinearGradient(colors: [.teal, .blue, .init(red: 0.2, green: 0.2, blue: 1)],
+        case .morning:
+            LinearGradient(colors: [.teal, .teal, .blue, .indigo, lightPurple],
                            startPoint: .topLeading, endPoint: .bottomTrailing)
             .ignoresSafeArea(.all)
-        case .sunSet:
-            LinearGradient(colors: [.orange, .init(red: 0.1, green: 0.1, blue: 0.5)],
+        case .day:
+            LinearGradient(colors: [lightBlue, .blue, .teal],
+                           startPoint: .topLeading, endPoint: .bottomTrailing)
+            .ignoresSafeArea(.all)
+        case .evening:
+            LinearGradient(colors: [.indigo, .purple.opacity(0.95), lightBlue, lightFadedBlue],
                            startPoint: .topLeading, endPoint: .bottomTrailing)
             .ignoresSafeArea(.all)
         case .night:
-            LinearGradient(colors: [.indigo, .init(red: 0.1, green: 0.1, blue: 0.5)],
+            LinearGradient(colors: [lightPurple, .indigo],
                            startPoint: .topLeading, endPoint: .bottomTrailing)
             .ignoresSafeArea(.all)
         }
@@ -44,6 +45,6 @@ struct WeatherBackgroundView: View {
 
 struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherBackgroundView(backgroundState: .defaultDay)
+        WeatherBackgroundView(backgroundState: .evening)
     }
 }
