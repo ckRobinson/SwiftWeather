@@ -8,14 +8,17 @@
 import Foundation
 
 
-class WeatherDataViewModel: ObservableObject {
+class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     
     @Published var userLocation: LocationCurrentWeatherData?;
     @Published var timeBasedBackgroundState: BackgroundState = .day;
     let weatherDataService: WeatherFetchService = WeatherFetchService();
-    
+    let locationManager: UserLocationManager = UserLocationManager();
+
     init() {
-        self.timeBasedBackgroundState = BackgroundState.parseDateToBackgroundState(date: Date())
+        self.timeBasedBackgroundState = BackgroundState.parseDateToBackgroundState(date: Date())    
+        self.locationManager.delegate = self;
+        self.locationManager.requestUsersLocation()
     }
 
     @MainActor func fetchWeatherBy(search: String) {
@@ -70,5 +73,9 @@ class WeatherDataViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    @MainActor func updatedUser(lat: Double, lon: Double) {
+        self.updateWeatherData(lat: Float(lat), lon: Float(lon));
     }
 }
