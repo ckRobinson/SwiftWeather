@@ -20,6 +20,7 @@
 		7E1D050D2A48C3C900ED114F /* GeoLocationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D050C2A48C3C900ED114F /* GeoLocationDataModel.swift */; };
 		7E1D05112A48CC4100ED114F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05102A48CC4100ED114F /* BackgroundView.swift */; };
 		7E1D05152A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */; };
+		7E1D051A2A4A70F700ED114F /* CurrentWeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05192A4A70F700ED114F /* CurrentWeatherDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		7E1D05102A48CC4100ED114F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCurrentWeatherCardView.swift; sourceTree = "<group>"; };
 		7E1D05182A4A357C00ED114F /* Swift-Weather-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Swift-Weather-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		7E1D05192A4A70F700ED114F /* CurrentWeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				7E1D050C2A48C3C900ED114F /* GeoLocationDataModel.swift */,
 				7E0E90C82A489FBD001C8ACC /* CurrentWeatherApiModel.swift */,
+				7E1D05192A4A70F700ED114F /* CurrentWeatherDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1D051A2A4A70F700ED114F /* CurrentWeatherDataModel.swift in Sources */,
 				7E1D05152A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift in Sources */,
 				7E0E90A02A489E85001C8ACC /* ContentView.swift in Sources */,
 				7E0E909E2A489E85001C8ACC /* Swift_Weather_AppApp.swift in Sources */,
