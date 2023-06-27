@@ -18,19 +18,15 @@ struct ContentView: View {
                 WeatherBackgroundView(backgroundState: viewModel.timeBasedBackgroundState)
                 
                 VStack {
-                    if let weatherData = viewModel.weatherData {
-                        LocationCurrentWeatherCardView(weatherData: weatherData)
+                    if let userLocation = viewModel.userLocation {
+                        LocationCurrentWeatherCardView(weatherData: userLocation)
                             .padding(.horizontal)
                             .padding(.top)
-                            .padding(.bottom, 3)
                     }
                     Spacer()
                 }
             }
             .navigationTitle("Weather")
-        }
-        .onAppear() {
-            viewModel.updateWeatherData()
         }
         .searchable(text: $searchText, prompt: "Search for a city/state")
         .onSubmit(of: .search) {
