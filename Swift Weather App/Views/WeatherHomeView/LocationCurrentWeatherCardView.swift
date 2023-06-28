@@ -32,9 +32,6 @@ struct LocationCurrentWeatherCardView: View {
             }
         }
         .padding()
-        .background(.blue)
-        .cornerRadius(15)
-        .shadow(radius: 1, x: 1, y: 1)
     }
     
     var locationInfo: some View {
@@ -85,6 +82,10 @@ struct LocationCurrentWeatherCardView_Previews: PreviewProvider {
         ZStack {
             WeatherBackgroundView()
             LocationCurrentWeatherCardView()
+                .background(.blue)
+                .cornerRadius(15)
+                .shadow(radius: 1, x: 1, y: 1)
+                .padding()
         }
     }
 }

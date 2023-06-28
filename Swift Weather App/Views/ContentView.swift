@@ -18,11 +18,7 @@ struct ContentView: View {
                 WeatherBackgroundView(backgroundState: viewModel.timeBasedBackgroundState)
                 
                 VStack {
-                    if let userLocation = viewModel.userLocation {
-                        LocationCurrentWeatherCardView(weatherData: userLocation)
-                            .padding(.horizontal)
-                            .padding(.top)
-                    }
+                    weatherLocationCard()
                     Spacer()
                 }
             }
@@ -36,6 +32,29 @@ struct ContentView: View {
         .searchable(text: $searchText, prompt: "Search for a city/state")
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
+        }
+    }
+    
+    private func weatherLocationCard() -> some View {
+        Group {
+            if let userLocation = viewModel.userLocation {
+                NavigationLink(destination: {
+                    
+                }, label: {
+                    HStack {
+                        LocationCurrentWeatherCardView(weatherData: userLocation)
+                        
+                        Image(systemName: "chevron.right")
+                            .fontWeight(Font.Weight.medium)
+                            .padding(.trailing)
+                            .foregroundColor(.white)
+                    }
+                    .background(.blue)
+                    .cornerRadius(15)
+                    .shadow(radius: 1, x: 1, y: 1)
+                    .padding(.horizontal)
+                })
+            }
         }
     }
 }
