@@ -139,3 +139,38 @@ struct LocationFeelsLikeData {
     
     static let mockData = LocationFeelsLikeData(feelsLikeDegrees: 71, currentTemperatureDregrees: 71)
 }
+
+struct LocationHumidityData {
+    let humidityPercent: Int;
+    let dewPointFahrenheit: Float;
+    var dewPointFahrenheitFormattedString: String {
+        String(format: "%.0f", self.dewPointFahrenheit)
+    }
+    
+    init(humidityPercent: Int, currentTempFahrenheit: Float) {
+        
+        self.humidityPercent = humidityPercent;
+        self.dewPointFahrenheit = LocationHumidityData.estimateDewPointDegrees(humidityPercent: humidityPercent,
+                                                                    currentTempFahrenheit: currentTempFahrenheit)
+    }
+    
+    init(humidityPercent: Int, dewPointDegrees: Float) {
+        self.humidityPercent = humidityPercent
+        self.dewPointFahrenheit = dewPointDegrees
+    }
+    
+    private static func estimateDewPointDegrees(humidityPercent: Int, currentTempFahrenheit: Float) -> Float {
+        
+        ///https://www.metric-conversions.org/temperature/fahrenheit-to-celsius.htm
+        let tempCelsius = Float(currentTempFahrenheit - 32) / 1.8;
+        
+        ///https://iridl.ldeo.columbia.edu/dochelp/QA/Basic/dewpoint.html
+        
+        let dewPointCelsius = tempCelsius - Float((100 - humidityPercent) / 5);
+        
+        let dewPointFahrenheit = (dewPointCelsius * 1.8) + 32;
+        return dewPointFahrenheit;
+    }
+    
+    static let mockData = LocationHumidityData(humidityPercent: 45, dewPointDegrees: 47.0)
+}
