@@ -199,3 +199,28 @@ struct LocationVisibilityData {
     
     static let mockData = LocationVisibilityData(visibilityMiles: 10, visibilityDescription: "It's perfectly clear.")
 }
+
+enum AirPressureState {
+    case up;
+    case neutral;
+    case down;
+}
+struct LocationAirPressureData {
+    let airPressure_inHg: Float;
+    let airPressureChange: AirPressureState
+    
+    init(airPressureIn_hPa: Int,
+         airPressureChange: AirPressureState) {
+        self.airPressureChange = airPressureChange
+        
+        /// https://www.convertunits.com/from/hpa/to/inhg
+        self.airPressure_inHg = Float(airPressureIn_hPa) * 0.02953
+    }
+    
+    init(airPressure_inHg: Float,
+         airPressureChange: AirPressureState) {
+        self.airPressureChange = airPressureChange
+        self.airPressure_inHg = airPressure_inHg
+    }
+    static let mockData = LocationAirPressureData(airPressure_inHg: 29.95, airPressureChange: .up)
+}
