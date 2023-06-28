@@ -30,7 +30,7 @@ enum APIError: Error {
     }
 }
 
-struct Constants {
+private struct Constants {
     static let apiKey = "db9a10cd3dd4f0934a3d1d9e7fff30f7"
     static let weatherLonLatApi_BaseUrl = "https://api.openweathermap.org/data/2.5/weather?"
     static let weatherGeoLocApi_BaseUrl = "https://api.openweathermap.org/geo/1.0/direct?"
