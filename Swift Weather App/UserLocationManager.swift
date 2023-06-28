@@ -57,7 +57,6 @@ class UserLocationManager: NSObject, CLLocationManagerDelegate {
             
         case .notDetermined:
             self.locationStatus = .notDetermined
-            self.locationManager.requestWhenInUseAuthorization()
             break
 
         default:
