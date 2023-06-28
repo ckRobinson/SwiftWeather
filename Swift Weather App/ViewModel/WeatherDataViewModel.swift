@@ -71,6 +71,13 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     
     @MainActor func viewHasAppeared() {
         
+        if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
+            /// Load "GPS" mock data in preview.
+            /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
+            self.userLocation = LocationCurrentWeatherData.mockData()
+            return;
+        }
+        
         if self.savedLat == 0 && self.savedLon == 0 {
             self.locationManager.requestUsersLocation()
         }
