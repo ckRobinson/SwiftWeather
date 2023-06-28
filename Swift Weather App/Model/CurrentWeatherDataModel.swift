@@ -91,3 +91,18 @@ struct LocationStatus {
     
     public static let mockData = LocationStatus(numericData: NumericWeather_ApiData.mockData, descriptiveData: DescriptveWeather_ApiData.mockData);
 }
+
+struct LocationWindConditionsData {
+    
+    let windSpeedMPH: Int;
+    let windDirectionDegrees: Double;
+    
+    static let mockData = LocationWindConditionsData(windSpeedMPH: 8, windDirectionDegrees: 45.0)
+}
+
+struct RainfallData {
+    let rainfallInches: Int;
+    let rainfallDescription: String;
+    
+    static let mockData = RainfallData(rainfallInches: 0, rainfallDescription: "None expected in next 10 days.")
+}
