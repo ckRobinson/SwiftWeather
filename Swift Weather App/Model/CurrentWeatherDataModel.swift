@@ -9,21 +9,41 @@ import Foundation
 
 struct LocationCurrentWeatherData {
     private let rawData: WeatherApiDataModel
+  
+    let locationInfo: LocationInfo;
+    let locationStatus: LocationStatus
     
-    let locationName: String;
-    let localTime: String;
-    
-    let currentTemp: Float;
-    let dayMinTemp: Float;
-    let dayMaxTemp: Float;
-    
-    let weatherIconName: String;
-    let dayWeatherDescription: String;
+    /// Additional Data:
+    let windData: LocationWindConditionsData
+    let feelsLike: LocationFeelsLikeData;
+    let humidity: LocationHumidityData;
+    let visibility: LocationVisibilityData;
+    let airPressure: LocationAirPressureData;
     
     init(rawData: WeatherApiDataModel) {
         
         self.rawData = rawData;
         
+        self.locationInfo = LocationInfo(locationName: rawData.name, localTimeStamp: rawData.dateTime)
+        self.locationStatus = LocationStatus(numericData: rawData.numericWeatherData,
+                                                           descriptiveData: rawData.descriptiveWeatherData)
+        
+        self.windData = LocationWindConditionsData(windSpeedMPH: Int(rawData.windConditions.speed),
+                                           windDirectionDegrees: Double(rawData.windConditions.deg));
+        self.feelsLike = LocationFeelsLikeData(feelsLikeDegrees: rawData.numericWeatherData.feels_like,
+                                                  currentTemperatureDregrees: rawData.numericWeatherData.temp);
+        
+        self.humidity = LocationHumidityData(humidityPercent: rawData.numericWeatherData.humidity,
+                                     currentTempFahrenheit: rawData.numericWeatherData.temp);
+        
+        self.visibility = LocationVisibilityData(visibilityMeters: rawData.visibility)
+        
+        self.airPressure = LocationAirPressureData(airPressureIn_hPa: rawData.numericWeatherData.pressure,
+                                           airPressureChange: .neutral);
+    }
+    
+    public static func mockData() -> LocationCurrentWeatherData {
+        return LocationCurrentWeatherData(rawData: WeatherApiDataModel.mockData)
     }
 }
 
