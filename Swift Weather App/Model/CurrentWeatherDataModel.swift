@@ -24,37 +24,28 @@ struct LocationCurrentWeatherData {
         
         self.rawData = rawData;
         
-        self.locationName = rawData.name;
-        self.localTime = LocationCurrentWeatherData.formatLocalTime(timeStamp: rawData.dt);
+    }
+}
+
+struct LocationInfo {
+    let name: String;
+    let localTime: String;
+    
+    init(locationName: String, localTimeStamp: Int) {
         
-        self.currentTemp = rawData.main.temp;
-        self.dayMinTemp = rawData.main.temp_min;
-        self.dayMaxTemp = rawData.main.temp_max;
-        
-        if let data = rawData.weather.first {
-            self.dayWeatherDescription = data.description.capitalized;
-            self.weatherIconName = LocationCurrentWeatherData.getWeatherIconFromApiCode(apiCode: data.icon);
-        }
-        else {
-            self.dayWeatherDescription = "";
-            self.weatherIconName = "";
-        }
+        self.name = locationName;
+        self.localTime = LocationInfo.formatLocalTime(localTimeStamp: localTimeStamp);
     }
     
-    private static func formatLocalTime(timeStamp: Int) -> String {
+    private static func formatLocalTime(localTimeStamp: Int) -> String {
         
-        let date = Date(timeIntervalSince1970: Double(timeStamp))
+        let date = Date(timeIntervalSince1970: Double(localTimeStamp))
         let formattedTime = date.formatted(Date.FormatStyle()
             .hour(.defaultDigits(amPM: .abbreviated))
-            .minute(.twoDigits))
+            .minute(.twoDigits));
+        
         return "\(formattedTime)";
     }
     
-    private static func getWeatherIconFromApiCode(apiCode: String) -> String {
-        return "sun.max.fill" // TODO: Process description to icon type.
-    }
-    
-    public static func mockData() -> LocationCurrentWeatherData {
-        return LocationCurrentWeatherData(rawData: WeatherApiDataModel.mockData)
-    }
+    public static let mockData = LocationInfo(locationName: "Cupertino", localTimeStamp: 1687711340)
 }
