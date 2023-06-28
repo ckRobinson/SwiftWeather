@@ -68,7 +68,7 @@ struct NumericWeather_ApiData: Codable {
     let pressure: Int;
     let humidity: Int;
     
-    static let mockData = NumericWeather_ApiData(temp: 287.09, feels_like: 286.73, temp_min: 285.08, temp_max: 290, pressure: 1019, humidity: 84)
+    static let mockData = NumericWeather_ApiData(temp: 87.09, feels_like: 86.73, temp_min: 85.08, temp_max: 90, pressure: 1019, humidity: 84)
 }
 
 struct WindConditions_ApiData: Codable {
