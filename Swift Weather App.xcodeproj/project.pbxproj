@@ -181,8 +181,9 @@
 		7E1D050E2A48CC1300ED114F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7E1D05132A48CE8400ED114F /* CurrentWeatherView */,
 				7E1D050F2A48CC2D00ED114F /* SharedViews */,
+				7E1D05202A4BC57400ED114F /* WeatherDetailsView */,
+				7E1D05212A4BC58600ED114F /* WeatherHomeView */,
 				7E0E909F2A489E85001C8ACC /* ContentView.swift */,
 			);
 			path = Views;
@@ -196,20 +197,27 @@
 			path = SharedViews;
 			sourceTree = "<group>";
 		};
-		7E1D05132A48CE8400ED114F /* CurrentWeatherView */ = {
-			isa = PBXGroup;
-			children = (
-				7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */,
-			);
-			path = CurrentWeatherView;
-			sourceTree = "<group>";
-		};
 		7E1D051D2A4B928600ED114F /* DataConversions */ = {
 			isa = PBXGroup;
 			children = (
 				7E1D051E2A4B92A700ED114F /* BackgroundState.swift */,
 			);
 			path = DataConversions;
+			sourceTree = "<group>";
+		};
+		7E1D05202A4BC57400ED114F /* WeatherDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WeatherDetailsView;
+			sourceTree = "<group>";
+		};
+		7E1D05212A4BC58600ED114F /* WeatherHomeView */ = {
+			isa = PBXGroup;
+			children = (
+				7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */,
+			);
+			path = WeatherHomeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
