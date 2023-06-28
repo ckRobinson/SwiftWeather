@@ -106,3 +106,36 @@ struct RainfallData {
     
     static let mockData = RainfallData(rainfallInches: 0, rainfallDescription: "None expected in next 10 days.")
 }
+
+struct LocationFeelsLikeData {
+    let feelsLikeDegrees: Float;
+    var feelsLikeFormattedString: String {
+        String(format: "%.0f", self.feelsLikeDegrees)
+    }
+    
+    let feelsLikeDescription: String;
+    
+    init(feelsLikeDegrees: Float, currentTemperatureDregrees: Float) {
+        self.feelsLikeDegrees = feelsLikeDegrees
+        
+        if(Int(self.feelsLikeDegrees) == Int(currentTemperatureDregrees)) {
+            self.feelsLikeDescription = "The same as the actual temerature."
+        }
+        else if(self.feelsLikeDegrees < currentTemperatureDregrees - 5) {
+            self.feelsLikeDescription = "Colder than the actual temperature."
+        }
+        else if(self.feelsLikeDegrees > currentTemperatureDregrees + 5) {
+            self.feelsLikeDescription = "Hotter than the actual temperature."
+        }
+        else {
+            self.feelsLikeDescription = "Similar to the actual temperature."
+        }
+    }
+    
+    init(feelsLikeDegrees: Float, feelsLikeDescription: String) {
+        self.feelsLikeDegrees = feelsLikeDegrees;
+        self.feelsLikeDescription = feelsLikeDescription;
+    }
+    
+    static let mockData = LocationFeelsLikeData(feelsLikeDegrees: 71, currentTemperatureDregrees: 71)
+}
