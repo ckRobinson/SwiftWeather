@@ -9,27 +9,38 @@ import Foundation
 
 struct WeatherApiDataModel: Codable {
     let coord: Coord;
-    let weather: [Weather];
-    let main: MainWeather;
+    let descriptiveWeatherData: [DescriptveWeather_ApiData];
+    let numericWeatherData: NumericWeather_ApiData;
     let visibility: Int;
-    let wind: WindSpeed;
+    let windConditions: WindConditions_ApiData;
     let clouds: Clouds;
-    let dt: Int;
-    let sys: WeatherSystemData;
+    let dateTime: Int;
+    let sunRiseAndSet: LocationSunRiseSet_ApiData;
     let timezone: Int
-    let id: Int;
     let name: String;
     
+    enum CodingKeys: String, CodingKey {
+        case coord
+        case descriptiveWeatherData = "weather"
+        case numericWeatherData = "main"
+        case visibility
+        case windConditions = "wind"
+        case clouds
+        case dateTime = "dt"
+        case sunRiseAndSet = "sys"
+        case timezone
+        case name
+    }
+    
     static let mockData = WeatherApiDataModel(coord: .mockData,
-                                       weather: Weather.mockData,
-                                       main: .mockData,
+                                       descriptiveWeatherData: DescriptveWeather_ApiData.mockData,
+                                       numericWeatherData: .mockData,
                                        visibility: 10000,
-                                       wind: .mockData,
+                                       windConditions: .mockData,
                                        clouds: .mockData,
-                                       dt: 1687711340,
-                                       sys: .mockData,
+                                       dateTime: 1687711340,
+                                       sunRiseAndSet: .mockData,
                                        timezone: -25200,
-                                       id: 5322737,
                                        name: "Alameda")
 }
 
@@ -40,16 +51,16 @@ struct Coord: Codable {
     static let mockData = Coord(lon: -122.2416, lat: 37.7652)
 }
 
-struct Weather: Codable {
+struct DescriptveWeather_ApiData: Codable {
     let id: Int;
     let main: String;
     let description: String;
     let icon: String
     
-    static let mockData = [Weather(id: 804, main: "Clouds", description: "overcast clouds", icon: "04d")]
+    static let mockData = [DescriptveWeather_ApiData(id: 804, main: "Clouds", description: "overcast clouds", icon: "04d")]
 }
 
-struct MainWeather: Codable {
+struct NumericWeather_ApiData: Codable {
     let temp: Float;
     let feels_like: Float;
     let temp_min: Float;
@@ -57,14 +68,14 @@ struct MainWeather: Codable {
     let pressure: Int;
     let humidity: Int;
     
-    static let mockData = MainWeather(temp: 287.09, feels_like: 286.73, temp_min: 285.08, temp_max: 290, pressure: 1019, humidity: 84)
+    static let mockData = NumericWeather_ApiData(temp: 287.09, feels_like: 286.73, temp_min: 285.08, temp_max: 290, pressure: 1019, humidity: 84)
 }
 
-struct WindSpeed: Codable {
+struct WindConditions_ApiData: Codable {
     let speed: Double;
     let deg: Int;
     
-    static let mockData = WindSpeed(speed: 5.66, deg: 290)
+    static let mockData = WindConditions_ApiData(speed: 5.66, deg: 290)
 }
 
 struct Clouds: Codable {
@@ -73,12 +84,9 @@ struct Clouds: Codable {
     static let mockData = Clouds(all: 100)
 }
 
-struct WeatherSystemData: Codable {
-    let type: Int;
-    let id: Int;
+struct LocationSunRiseSet_ApiData: Codable {
     let country: String;
     let sunrise: Int;
     let sunset: Int;
-    
-    static let mockData = WeatherSystemData(type: 2, id: 2016341, country: "US", sunrise: 1687697300, sunset: 1687750482)
+    static let mockData = LocationSunRiseSet_ApiData(country: "US", sunrise: 1687697300, sunset: 1687750482)
 }
