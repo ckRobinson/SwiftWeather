@@ -174,3 +174,28 @@ struct LocationHumidityData {
     
     static let mockData = LocationHumidityData(humidityPercent: 45, dewPointDegrees: 47.0)
 }
+
+struct LocationVisibilityData {
+    let visibilityMiles: Int;
+    let visibilityDescription: String;
+    
+    init(visibilityMeters: Int) {
+        
+        /// https://www.unitconverters.net/length/km-to-miles.htm
+        self.visibilityMiles = Int(Float(visibilityMeters / 1000) * 0.621371192);
+        
+        self.visibilityDescription = LocationVisibilityData.GetDescriptionFromVisibleMiles(self.visibilityMiles)
+    }
+    
+    init(visibilityMiles: Int, visibilityDescription: String) {
+        self.visibilityMiles = visibilityMiles;
+        self.visibilityDescription = visibilityDescription;
+    }
+    
+    private static func GetDescriptionFromVisibleMiles(_ visibilityMiles: Int) -> String {
+        //TODO: Add conditional here to return different string based on data.
+        return "It's perfectly clear."
+    }
+    
+    static let mockData = LocationVisibilityData(visibilityMiles: 10, visibilityDescription: "It's perfectly clear.")
+}
