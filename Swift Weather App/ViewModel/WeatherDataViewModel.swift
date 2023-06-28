@@ -15,16 +15,22 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     let weatherDataService: WeatherFetchService = WeatherFetchService();
     let locationManager: UserLocationManager = UserLocationManager();
 
+    var savedLon: Float = 0;
+    var savedLat: Float = 0;
+    
     init() {
         self.timeBasedBackgroundState = BackgroundState.parseDateToBackgroundState(date: Date())    
         self.locationManager.delegate = self;
-        self.locationManager.requestUsersLocation()
+        
+        self.updateUserDefaults();
     }
 
     @MainActor func fetchWeatherBy(search: String) {
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(search: search)
+                self.saveUserLocation(lat: weatherDataModel.coord.lat, lon: weatherDataModel.coord.lon);
+                
                 self.userLocation = LocationCurrentWeatherData(rawData: weatherDataModel);
             }
             catch {
@@ -56,7 +62,42 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         }
     }
     
+    /// Delegate function, called by LocationManager
     @MainActor func updatedUser(lat: Double, lon: Double) {
+        
+        self.saveUserLocation(lat: Float(lat), lon: Float(lon));
         self.updateWeatherData(lat: Float(lat), lon: Float(lon));
     }
+    
+    @MainActor func viewHasAppeared() {
+        
+        if self.savedLat == 0 && self.savedLon == 0 {
+            self.locationManager.requestUsersLocation()
+        }
+        else {
+            self.updateWeatherData(lat: Float(self.savedLat), lon: Float(self.savedLon));
+        }
+    }
+    
+    
+    /// User defaults tutorial:
+    /// https://www.hackingwithswift.com/example-code/system/how-to-save-user-settings-using-userdefaults
+    private func updateUserDefaults() {
+        let lat = UserDefaults.standard.float(forKey: Constants.userDefaults_SavedLatitude);
+        let lon = UserDefaults.standard.float(forKey: Constants.userDefaults_SavedLongitude);
+//        print("Loaded -> Lat: \(lat), Lon: \(lon)");
+        
+        self.savedLat = lat;
+        self.savedLon = lon;
+    }
+    
+    private func saveUserLocation(lat: Float, lon: Float) {
+        UserDefaults.standard.set(lat, forKey: Constants.userDefaults_SavedLatitude);
+        UserDefaults.standard.set(lon, forKey: Constants.userDefaults_SavedLongitude);
+    }
+}
+
+private struct Constants {
+    static let userDefaults_SavedLatitude = "UserSavedLat"
+    static let userDefaults_SavedLongitude = "UserSavedLon"
 }
