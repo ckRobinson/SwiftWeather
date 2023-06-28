@@ -28,12 +28,15 @@ struct ContentView: View {
             }
             .navigationTitle("Weather")
         }
+        .onAppear() {
+            viewModel.viewHasAppeared();
+        }
+        /// Searchable tutorial:
+        /// https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-a-search-bar-to-filter-your-data
         .searchable(text: $searchText, prompt: "Search for a city/state")
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
         }
-        /// Searchable tutorial:
-        /// https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-a-search-bar-to-filter-your-data
     }
 }
 
