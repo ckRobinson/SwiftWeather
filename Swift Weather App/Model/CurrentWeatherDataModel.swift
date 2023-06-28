@@ -49,3 +49,45 @@ struct LocationInfo {
     
     public static let mockData = LocationInfo(locationName: "Cupertino", localTimeStamp: 1687711340)
 }
+
+struct LocationStatus {
+    
+    let temperature: Float;
+    var temperatureFormattedString: String {
+        String(format: "%.0f", self.temperature)
+    }
+    
+    let dailyHigh: Float;
+    var dailyHighFormattedString: String {
+        String(format: "%.0f", self.dailyHigh);
+    }
+    
+    let dailyLow: Float;
+    var dailyLowFormattedString: String {
+        String(format: "%.0f", self.dailyLow);
+    }
+    
+    let description: String;
+    let iconPath: String;
+    
+    init(numericData: NumericWeather_ApiData, descriptiveData: [DescriptveWeather_ApiData]) {
+        self.temperature = numericData.temp;
+        self.dailyHigh = numericData.temp_max;
+        self.dailyLow = numericData.temp_min;
+        
+        if let data = descriptiveData.first {
+            self.description = data.description.capitalized;
+            self.iconPath = LocationStatus.getWeatherIconFromApiCode(apiCode: data.icon);
+        }
+        else {
+            self.description = "";
+            self.iconPath = "";
+        }
+    }
+    
+    private static func getWeatherIconFromApiCode(apiCode: String) -> String {
+        return "sun.max.fill" // TODO: Process description to icon type.
+    }
+    
+    public static let mockData = LocationStatus(numericData: NumericWeather_ApiData.mockData, descriptiveData: DescriptveWeather_ApiData.mockData);
+}
