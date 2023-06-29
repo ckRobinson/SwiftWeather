@@ -36,7 +36,7 @@ private struct Constants {
     static let weatherGeoLocApi_BaseUrl = "https://api.openweathermap.org/geo/1.0/direct?"
 }
 
-class APIManager {
+struct APIManager {
     static let latitude = "lat="
     static let longitude = "&lon="
     static let apiKey = "&appid=\(Constants.apiKey)"
