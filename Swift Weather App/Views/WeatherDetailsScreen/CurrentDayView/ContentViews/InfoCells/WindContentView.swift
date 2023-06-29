@@ -48,7 +48,7 @@ struct WindContentView: View {
         
         return Group {
             Circle()
-                .stroke(Color("lightBlue"),
+                .stroke(.white,
                         style: StrokeStyle(lineWidth: 7, lineCap: .butt, lineJoin: .miter,
                                            miterLimit: 0, dash: [dotLength, spaceLength], dashPhase: 0))
                 .frame(maxWidth: .infinity)

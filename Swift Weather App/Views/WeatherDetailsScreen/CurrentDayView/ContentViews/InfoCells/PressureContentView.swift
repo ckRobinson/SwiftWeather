@@ -56,7 +56,7 @@ struct PressureContentView: View {
         return Group {
             Circle()
                 .trim(from: 0, to: 0.71)
-                .stroke(Color("lightBlue"),
+                .stroke(.white,
                         style: StrokeStyle(lineWidth: 11, lineCap: .butt, lineJoin: .miter,
                                            miterLimit: 0, dash: [dotLength, spaceLength], dashPhase: 0))
                 .frame(maxWidth: .infinity)

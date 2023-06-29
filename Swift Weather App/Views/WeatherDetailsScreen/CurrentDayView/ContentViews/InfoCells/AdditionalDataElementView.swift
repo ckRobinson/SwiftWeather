@@ -39,7 +39,7 @@ struct AdditionalDataElementView: View {
             .frame(maxWidth: .infinity, alignment: .topLeading)
             .padding(.horizontal)
             .padding(.top)
-            .foregroundColor(Color("lightBlue"))
+            .foregroundColor(.white)
             
             AnyView(self.content)
         }
