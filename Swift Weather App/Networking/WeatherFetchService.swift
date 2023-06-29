@@ -87,7 +87,7 @@ class WeatherFetchService {
         return try JSONDecoder().decode(WeatherApiDataModel.self, from: data)
     }
 
-    private func fetchGeoLocation(search: String) async throws -> [GeoLocationDataModel] {
+    private func fetchGeoLocation(search: String) async throws -> [GeoLocationApiModel] {
         
         guard let url = URL(string: APIManager.getSearchGeoLocationURL(searchText: search)) else {
             throw APIError.invalidUrl
@@ -101,6 +101,6 @@ class WeatherFetchService {
 //        if let responseStr = String(data: data, encoding: .utf8) {
 //            print("Got Geo Location Response: \(responseStr)");
 //        }
-        return try JSONDecoder().decode([GeoLocationDataModel].self, from: data)
+        return try JSONDecoder().decode([GeoLocationApiModel].self, from: data)
     }
 }
