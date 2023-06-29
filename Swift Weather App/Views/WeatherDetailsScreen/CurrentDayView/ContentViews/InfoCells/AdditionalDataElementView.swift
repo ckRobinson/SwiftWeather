@@ -12,17 +12,19 @@ struct AdditionalDataElementView: View {
     let title: String
     let imageString: String
     let content: any View // If there is no content we render an empty view, is case for UV Index and Sunset in screenshot.
-    
-    init(title: String, imageString: String) {
+    let backgroundColor: Color;
+    init(title: String, imageString: String, backgroundColor: Color = .blue) {
         self.title = title
         self.imageString = imageString
         self.content = EmptyView()
+        self.backgroundColor = backgroundColor;
     }
     
-    init(title: String, imageString: String, content: any View) {
+    init(title: String, imageString: String, backgroundColor: Color = .blue, content: any View) {
         self.title = title;
         self.imageString = imageString;
         self.content = content;
+        self.backgroundColor = backgroundColor;
     }
     
     var body: some View {
@@ -43,7 +45,7 @@ struct AdditionalDataElementView: View {
         }
         .padding(.bottom)
         .frame(minWidth: 180, maxWidth: 180)
-        .background(.blue.opacity(0.5))
+        .background(self.backgroundColor.opacity(0.5))
         .cornerRadius(15)
         .shadow(radius: 1, x: 2, y: 2)
     }
