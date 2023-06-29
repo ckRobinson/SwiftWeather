@@ -10,13 +10,13 @@ import SwiftUI
 struct WeatherDetailsContentView: View {
     
     let data: LocationCurrentWeatherData
-    let backgroundState: BackgroundState
+    let backgroundState: TimeOfDay
 
     init(data: LocationCurrentWeatherData) {
         self.data = data
         self.backgroundState = .day
     }
-    init(data: LocationCurrentWeatherData, backgroundState: BackgroundState) {
+    init(data: LocationCurrentWeatherData, backgroundState: TimeOfDay) {
         self.data = data
         self.backgroundState = backgroundState
     }

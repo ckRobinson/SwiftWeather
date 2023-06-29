@@ -9,14 +9,14 @@ import SwiftUI
 
 struct WeatherBackgroundView: View {
     
-    let backgroundState: BackgroundState
+    let backgroundState: TimeOfDay
     let lightPurple = Color.init(red: 0.1, green: 0.1, blue: 0.5)
     let lightBlue = Color.init(red: 0.3, green: 0.5, blue: 1)
     let lightFadedBlue = Color.init(red: 0.3, green: 0.5, blue: 1)
     init() {
         self.backgroundState = .day
     }
-    init(backgroundState: BackgroundState) {
+    init(backgroundState: TimeOfDay) {
         self.backgroundState = backgroundState;
     }
     
@@ -54,7 +54,7 @@ struct BackgroundView_Previews: PreviewProvider {
 /// preview provider.
 private struct Preview: View {
     
-    @State var backgroundState: BackgroundState = .day
+    @State var backgroundState: TimeOfDay = .day
     var body: some View {
         ZStack {
             WeatherBackgroundView(backgroundState: self.backgroundState)

@@ -11,7 +11,7 @@ import Foundation
 class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     
     @Published var userLocation: LocationCurrentWeatherData?;
-    @Published var timeBasedBackgroundState: BackgroundState = .day;
+    @Published var timeBasedBackgroundState: TimeOfDay = .day;
     let weatherDataService: WeatherFetchService = WeatherFetchService();
     let locationManager: UserLocationManager = UserLocationManager();
 
@@ -19,7 +19,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     var savedLat: Float = 0;
     
     init() {
-        self.timeBasedBackgroundState = BackgroundState.parseDateToBackgroundState(date: Date())    
+        self.timeBasedBackgroundState = TimeOfDay.parseDateToBackgroundState(date: Date())    
         self.locationManager.delegate = self;
         
         self.updateUserDefaults();
