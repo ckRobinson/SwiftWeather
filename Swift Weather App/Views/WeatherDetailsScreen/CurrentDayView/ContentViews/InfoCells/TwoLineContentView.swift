@@ -36,7 +36,7 @@ struct TwoLineWeatherContentView_Previews: PreviewProvider {
         ZStack {
             WeatherBackgroundView()
             AdditionalDataElementView(title: "Feels Like",
-                                      imageString: "thermometer.",
+                                      imageString: "thermometer.medium",
                                       content: TwoLineContentView(mainContent: "71\u{00B0}",
                                                                   subContent: "Similar to the actual temperature."))
             .frame(height: 200)
