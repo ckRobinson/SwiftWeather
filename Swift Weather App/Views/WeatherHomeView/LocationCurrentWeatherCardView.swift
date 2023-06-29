@@ -19,57 +19,60 @@ struct LocationCurrentWeatherCardView: View {
     var body: some View {
         VStack {
             HStack {
-                locationInfo
+                locationInfo(info: self.weatherData.locationInfo)
                 Spacer()
-                locationCurrentTemp
+                currentTemp(currentStatus: self.weatherData.locationStatus)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack {
-                locationCurrentWeatherDescription
+                currentWeatherDescription(currentStatus: self.weatherData.locationStatus)
                 Spacer()
-                locationCurrentHighLowTemp
+                currentHighLowTemp(currentStatus: self.weatherData.locationStatus)
             }
         }
         .padding()
     }
     
-    var locationInfo: some View {
+    private func locationInfo(info: LocationInfo) -> some View {
         VStack(alignment: .leading) {
-            Text(weatherData.locationName)
+            Text(info.name)
                 .font(.system(size: 18).bold())
                 .foregroundColor(.white)
-            Text("\(weatherData.localTime)")
+            Text("\(info.localTime)")
                 .font(.system(size: 15))
                 .foregroundColor(.white)
         }
     }
     
-    var locationCurrentTemp: some View {
-        Text("\(String(format: "%.2f", weatherData.currentTemp))\u{00B0}")
+    private func currentTemp(currentStatus: LocationStatus)
+    -> some View {
+        Text("\(currentStatus.temperatureFormattedString)\u{00B0}")
             .font(.system(size: 20).bold())
             .foregroundColor(.white)
     }
     
-    var locationCurrentWeatherDescription: some View {
+    private func currentWeatherDescription(currentStatus: LocationStatus)
+    -> some View {
         HStack {
-            Text(weatherData.dayWeatherDescription)
+            Text(currentStatus.description)
                 .font(.system(size: 12))
                 .foregroundColor(.white)
-            Image(systemName: weatherData.weatherIconName)
+            Image(systemName: currentStatus.iconPath)
                 .renderingMode(.original)
                 .resizable()
                 .frame(width: 15, height: 15)
         }
     }
     
-    var locationCurrentHighLowTemp: some View {
+    private func currentHighLowTemp(currentStatus: LocationStatus)
+    -> some View {
         HStack {
-            Text("H: \(String(format: "%.2f", weatherData.dayMaxTemp))\u{00B0}")
+            Text("H: \(currentStatus.dailyHighFormattedString)\u{00B0}")
                 .font(.system(size: 12).bold())
                 .foregroundColor(.white)
             
-            Text("L: \(String(format: "%.2f", weatherData.dayMinTemp))\u{00B0}")
+            Text("L: \(currentStatus.dailyLowFormattedString)\u{00B0}")
                 .font(.system(size: 12).bold())
                 .foregroundColor(.white)
         }
