@@ -54,19 +54,41 @@ struct LocationCurrentWeatherData {
 struct LocationInfo {
     let name: String;
     let localTime: String;
+    var localDateTime: Date;
+    let locationTimeOfDay: TimeOfDay;
     
     init(locationName: String, localTimeStamp: Int) {
         
         self.name = locationName;
-        self.localTime = LocationInfo.formatLocalTime(localTimeStamp: localTimeStamp);
+        self.localDateTime = Date(timeIntervalSince1970: TimeInterval(localTimeStamp))
+        self.localTime = LocationInfo.formatLocalTime(localDateTime: self.localDateTime, timezoneOffset: 0);
+        
+        self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: self.localDateTime);
     }
     
-    private static func formatLocalTime(localTimeStamp: Int) -> String {
+    init(locationName: String, localTimeStamp: Int, timezoneOffset: Int) {
         
-        let date = Date(timeIntervalSince1970: Double(localTimeStamp))
-        let formattedTime = date.formatted(Date.FormatStyle()
-            .hour(.defaultDigits(amPM: .abbreviated))
-            .minute(.twoDigits));
+        self.name = locationName;
+        self.localDateTime = Date(timeIntervalSince1970: TimeInterval(localTimeStamp));
+        
+        self.localTime = LocationInfo.formatLocalTime(localDateTime: self.localDateTime, timezoneOffset: timezoneOffset);
+        
+        if let localeDate = Calendar.current.date(byAdding: .second, value: timezoneOffset, to: self.localDateTime) {
+            
+            self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: localeDate);
+        }
+        else {
+            self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: self.localDateTime);
+        }
+    }
+    
+    private static func formatLocalTime(localDateTime: Date, timezoneOffset: Int) -> String {
+        
+        let formatter = DateFormatter();
+        formatter.timeZone = TimeZone(secondsFromGMT: timezoneOffset);
+        formatter.dateFormat = "HH:mm a";
+        
+        let formattedTime = formatter.string(from: localDateTime);
         
         return "\(formattedTime)";
     }
@@ -299,4 +321,24 @@ struct LocationAirPressureData {
         self.airPressure_inHg = airPressure_inHg
     }
     static let mockData = LocationAirPressureData(airPressure_inHg: 29.95, airPressureChange: .up)
+}
+
+struct HourlyData: Identifiable {
+    
+    var id = UUID()
+    
+    let image: String;
+    let temperature: String;
+    let time: String;
+    
+    static let mockData: [HourlyData] = [
+        HourlyData(image: "sun.max.fill", temperature: "70", time: "Now"),
+        HourlyData(image: "sun.haze.fill", temperature: "57", time: "10AM"),
+        HourlyData(image: "sun.max.fill", temperature: "60", time: "11AM"),
+        HourlyData(image: "sun.max.fill", temperature: "61", time: "12PM"),
+        HourlyData(image: "cloud.sun.fill", temperature: "62", time: "1PM"),
+        HourlyData(image: "sun.max.fill" , temperature: "64", time: "2PM"),
+        HourlyData(image: "cloud.sun.fill", temperature: "65", time: "3PM"),
+        HourlyData(image: "sun.max.fill", temperature: "66", time: "4PM"),
+    ]
 }
