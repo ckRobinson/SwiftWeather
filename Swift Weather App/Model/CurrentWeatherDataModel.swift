@@ -24,22 +24,26 @@ struct LocationCurrentWeatherData {
         
         self.rawData = rawData;
         
-        self.locationInfo = LocationInfo(locationName: rawData.name, localTimeStamp: rawData.dateTime)
+        self.locationInfo = LocationInfo(locationName: rawData.name,
+                                         localTimeStamp: rawData.dateTime,
+                                         timezoneOffset: rawData.timezone)
+        
         self.locationStatus = LocationStatus(numericData: rawData.numericWeatherData,
-                                                           descriptiveData: rawData.descriptiveWeatherData)
+                                             descriptiveData: rawData.descriptiveWeatherData)
         
         self.windData = LocationWindConditionsData(windSpeedMPH: Int(rawData.windConditions.speed),
-                                           windDirectionDegrees: Double(rawData.windConditions.deg));
+                                                   windDirectionDegrees: Double(rawData.windConditions.deg));
+        
         self.feelsLike = LocationFeelsLikeData(feelsLikeDegrees: rawData.numericWeatherData.feels_like,
-                                                  currentTemperatureDregrees: rawData.numericWeatherData.temp);
+                                               currentTemperatureDregrees: rawData.numericWeatherData.temp);
         
         self.humidity = LocationHumidityData(humidityPercent: rawData.numericWeatherData.humidity,
-                                     currentTempFahrenheit: rawData.numericWeatherData.temp);
+                                             currentTempFahrenheit: rawData.numericWeatherData.temp);
         
         self.visibility = LocationVisibilityData(visibilityMeters: rawData.visibility)
         
         self.airPressure = LocationAirPressureData(airPressureIn_hPa: rawData.numericWeatherData.pressure,
-                                           airPressureChange: .neutral);
+                                                   airPressureChange: .neutral);
     }
     
     public static func mockData() -> LocationCurrentWeatherData {
