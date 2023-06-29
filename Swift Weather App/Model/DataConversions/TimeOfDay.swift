@@ -1,5 +1,5 @@
 //
-//  BackgroundState.swift
+//  TimeOfDay.swift
 //  Swift Weather App
 //
 //  Created by Cameron on 6/27/23.
@@ -12,6 +12,11 @@ enum TimeOfDay {
     case day;
     case evening;
     case night;
+    
+    /**
+     TODO: Add function to convert from current timecode and sunset, sunrise timecodes to night, morning
+     day, evening.
+     */
     
     public static func parseDateToBackgroundState(date: Date) -> TimeOfDay {
         
