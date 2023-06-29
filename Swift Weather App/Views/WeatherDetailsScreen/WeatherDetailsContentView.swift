@@ -10,11 +10,21 @@ import SwiftUI
 struct WeatherDetailsContentView: View {
     
     let data: LocationCurrentWeatherData
+    let backgroundState: BackgroundState
+
+    init(data: LocationCurrentWeatherData) {
+        self.data = data
+        self.backgroundState = .day
+    }
+    init(data: LocationCurrentWeatherData, backgroundState: BackgroundState) {
+        self.data = data
+        self.backgroundState = backgroundState
+    }
     
     var body: some View {
         ZStack {
-            WeatherBackgroundView()
-            
+            WeatherBackgroundView(backgroundState: backgroundState)
+
             ScrollView(showsIndicators: false) {
                 HeaderView(locationInfo: data.locationInfo,
                            locationStatus: data.locationStatus)
