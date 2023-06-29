@@ -199,7 +199,7 @@
 			children = (
 				7E1D050F2A48CC2D00ED114F /* SharedViews */,
 				7E1D05202A4BC57400ED114F /* WeatherDetailsScreen */,
-				7E1D05212A4BC58600ED114F /* WeatherHomeView */,
+				7E1D05212A4BC58600ED114F /* WeatherHomeScreen */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,13 +229,13 @@
 			path = WeatherDetailsScreen;
 			sourceTree = "<group>";
 		};
-		7E1D05212A4BC58600ED114F /* WeatherHomeView */ = {
+		7E1D05212A4BC58600ED114F /* WeatherHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
 				7E1D05142A48CE9B00ED114F /* LocationCurrentWeatherCardView.swift */,
 				7E0E909F2A489E85001C8ACC /* ContentView.swift */,
 			);
-			path = WeatherHomeView;
+			path = WeatherHomeScreen;
 			sourceTree = "<group>";
 		};
 		7E1D05222A4BC77600ED114F /* CurrentDayView */ = {
