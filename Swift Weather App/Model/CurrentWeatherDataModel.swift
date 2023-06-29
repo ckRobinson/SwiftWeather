@@ -137,7 +137,7 @@ struct LocationStatus {
         let isDay = apiCode.last == "d";
         let index = apiCode.index(apiCode.startIndex, offsetBy: 2);
         let firstTwo = apiCode[..<index];
-        print("ID: \(firstTwo), isDay: \(isDay)")
+
         /// Clear Sky
         if(firstTwo == "01") {
             
