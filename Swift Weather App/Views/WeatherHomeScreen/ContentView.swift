@@ -37,7 +37,13 @@ struct ContentView: View {
     }
     
     private func weatherLocationCard() -> some View {
-        Group {
+        
+        var backgroundColor: Color = .blue;
+        if let locationInfo = self.viewModel.userLocation?.locationInfo {
+            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: locationInfo.locationTimeOfDay);
+        }
+        
+        return Group {
             if let userLocation = viewModel.userLocation {
                 NavigationLink(destination: {
                     WeatherDetailsContentView(data: userLocation,
@@ -51,7 +57,7 @@ struct ContentView: View {
                             .padding(.trailing)
                             .foregroundColor(.white)
                     }
-                    .background(.blue)
+                    .background(backgroundColor)
                     .cornerRadius(15)
                     .shadow(radius: 1, x: 1, y: 1)
                     .padding(.horizontal)
