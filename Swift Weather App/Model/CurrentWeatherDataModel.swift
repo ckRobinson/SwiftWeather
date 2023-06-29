@@ -106,7 +106,59 @@ struct LocationStatus {
     }
     
     private static func getWeatherIconFromApiCode(apiCode: String) -> String {
-        return "sun.max.fill" // TODO: Process description to icon type.
+        /// Mapping from https://openweathermap.org/weather-conditions to SFSymbols.
+        
+        let isDay = apiCode.last == "d";
+        let index = apiCode.index(apiCode.startIndex, offsetBy: 2);
+        let firstTwo = apiCode[..<index];
+        print("ID: \(firstTwo), isDay: \(isDay)")
+        /// Clear Sky
+        if(firstTwo == "01") {
+            
+            return isDay ? "sun.max.fill" : "moon.fill";
+        }
+        
+        /// Few Clouds
+        if(firstTwo == "02") {
+            return isDay ? "cloud.sun.fill" : "cloud.moon.fill";
+        }
+        
+        /// Scattered Clouds
+        if(firstTwo == "03") {
+            return "cloud.fill"
+        }
+        
+        /// Broken Clouds
+        if(firstTwo == "04") {
+            return "smoke.fill"
+        }
+        
+        /// Shower Rain
+        if(firstTwo == "09") {
+            return "cloud.drizzle.fill"
+        }
+        
+        /// Rain
+        if(firstTwo == "10") {
+            return isDay ? "cloud.sun.rain.fill" : "cloud.moon.rain.fill";
+        }
+        
+        /// Thunderstorm
+        if(firstTwo == "11") {
+            return "cloud.bolt.fill"
+        }
+        
+        /// Snow
+        if(firstTwo == "13") {
+            return "snowflake"
+        }
+        
+        /// Mist
+        if(firstTwo == "50") {
+            return "cloud.fog.fill"
+        }
+        
+        return "sun.max.fill";
     }
     
     public static let mockData = LocationStatus(numericData: NumericWeather_ApiData.mockData, descriptiveData: DescriptveWeather_ApiData.mockData);
