@@ -73,7 +73,6 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     /// Delegate function, called by LocationManager
     @MainActor func updatedUser(lat: Double, lon: Double) {
         
-        self.saveUserLocation(lat: Float(lat), lon: Float(lon));
         self.updateWeatherData(lat: Float(lat), lon: Float(lon));
     }
     
