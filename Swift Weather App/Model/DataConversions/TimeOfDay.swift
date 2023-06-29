@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum BackgroundState {
+enum TimeOfDay {
     case morning;
     case day;
     case evening;
     case night;
     
-    public static func parseDateToBackgroundState(date: Date) -> BackgroundState {
+    public static func parseDateToBackgroundState(date: Date) -> TimeOfDay {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"
