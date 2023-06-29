@@ -11,15 +11,18 @@ struct WindContentView: View {
     
     let windSpeedMPH: Int
     let windDirectionDegrees: Double
+    let backgroundColor: Color;
     
-    init(windSpeedMPH: Int, windDirectionDegrees: Double) {
+    init(windSpeedMPH: Int, windDirectionDegrees: Double, backgroundColor: Color = .blue) {
         self.windSpeedMPH = windSpeedMPH
         self.windDirectionDegrees = windDirectionDegrees
+        self.backgroundColor = backgroundColor;
     }
     
-    init(conditionsData: LocationWindConditionsData) {
+    init(conditionsData: LocationWindConditionsData, backgroundColor: Color = .blue) {
         self.windSpeedMPH = conditionsData.windSpeedMPH;
         self.windDirectionDegrees = conditionsData.windDirectionDegrees;
+        self.backgroundColor = backgroundColor;
     }
     
     var body: some View {
@@ -72,7 +75,7 @@ struct WindContentView: View {
 
                 Circle()
                     .frame(width: 50)
-                    .foregroundColor(.blue)
+                    .foregroundColor(self.backgroundColor)
                     .padding(.vertical, 5)
                     .padding(.horizontal, 10)
                 
