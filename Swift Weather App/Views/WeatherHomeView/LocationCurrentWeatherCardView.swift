@@ -61,7 +61,8 @@ struct LocationCurrentWeatherCardView: View {
             Image(systemName: currentStatus.iconPath)
                 .renderingMode(.original)
                 .resizable()
-                .frame(width: 15, height: 15)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 15)
         }
     }
     
