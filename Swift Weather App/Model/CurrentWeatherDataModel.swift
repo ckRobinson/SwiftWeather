@@ -73,13 +73,8 @@ struct LocationInfo {
         
         self.localTime = LocationInfo.formatLocalTime(localDateTime: self.localDateTime, timezoneOffset: timezoneOffset);
         
-        if let localeDate = Calendar.current.date(byAdding: .second, value: timezoneOffset, to: self.localDateTime) {
-            
-            self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: localeDate);
-        }
-        else {
-            self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: self.localDateTime);
-        }
+        self.locationTimeOfDay = TimeOfDay.parseDateToBackgroundState(date: self.localDateTime,
+                                                                      timezoneOffset: timezoneOffset);
     }
     
     private static func formatLocalTime(localDateTime: Date, timezoneOffset: Int) -> String {

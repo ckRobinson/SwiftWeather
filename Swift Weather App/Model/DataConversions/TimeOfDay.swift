@@ -31,14 +31,16 @@ enum TimeOfDay {
      TODO: Add function to convert from current timecode and sunset, sunrise timecodes to night, morning
      day, evening.
      */
-    public static func parseDateToBackgroundState(date: Date) -> TimeOfDay {
+    public static func parseDateToBackgroundState(date: Date, timezoneOffset: Int = 0) -> TimeOfDay {
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
+        let formatter = DateFormatter();
+        formatter.timeZone = TimeZone(secondsFromGMT: timezoneOffset);
+        formatter.dateFormat = "HH";
+        
         let currentHour24hClock = formatter.string(from: date)
         
         switch(currentHour24hClock) {
-        case "0":
+        case "00":
             fallthrough;
         case "1":
             fallthrough;
