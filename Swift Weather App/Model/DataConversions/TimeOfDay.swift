@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum TimeOfDay {
     case morning;
@@ -13,11 +14,23 @@ enum TimeOfDay {
     case evening;
     case night;
     
+    public static func timeOfDayToCardBGColor(timeOfDay: TimeOfDay) -> Color {
+        switch(timeOfDay) {
+        case .day:
+            return .blue;
+        case .morning:
+            return Color("cardMorningColor");
+        case .evening:
+            return Color("cardEveningColor");
+        case .night:
+            return Color("cardNightColor");
+        }
+    }
+    
     /**
      TODO: Add function to convert from current timecode and sunset, sunrise timecodes to night, morning
      day, evening.
      */
-    
     public static func parseDateToBackgroundState(date: Date) -> TimeOfDay {
         
         let formatter = DateFormatter()
