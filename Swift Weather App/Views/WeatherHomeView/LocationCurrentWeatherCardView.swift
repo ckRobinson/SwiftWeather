@@ -38,11 +38,12 @@ struct LocationCurrentWeatherCardView: View {
         VStack(alignment: .leading) {
             Text(info.name)
                 .font(.system(size: 18).bold())
-                .foregroundColor(.white)
-            Text("\(info.localTime)")
-                .font(.system(size: 15))
-                .foregroundColor(.white)
+            Text("Last Updated: \(info.localTime)")
+                .font(.system(size: 13))
+            Text("(\(info.name) Time)")
+                .font(.system(size: 12))
         }
+        .foregroundColor(.white)
     }
     
     private func currentTemp(currentStatus: LocationStatus)
