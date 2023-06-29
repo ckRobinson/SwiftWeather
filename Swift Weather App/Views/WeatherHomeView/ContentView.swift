@@ -24,6 +24,7 @@ struct ContentView: View {
             }
             .navigationTitle("Weather")
         }
+        .tint(.black)
         .onAppear() {
             viewModel.viewHasAppeared();
         }
