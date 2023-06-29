@@ -68,13 +68,16 @@ struct PressureContentView: View {
         let dotLength: CGFloat = 25;
         let spaceLength: CGFloat = 360 + 25;
         return Group {
-            Circle()
-    //            .trim(from: 0, to: 0.1)
-                .stroke(LinearGradient(colors: [.white.opacity(0), .white], startPoint: .center, endPoint: .bottomTrailing),
-                        style: StrokeStyle(lineWidth: 11, lineCap: .butt, lineJoin: .miter,
-                                           miterLimit: 0, dash: [dotLength, spaceLength], dashPhase: 0))
-                .frame(maxWidth: .infinity)
-                .rotationEffect(.degrees(-115.5))
+            if(self.airPressureChange != .neutral) {
+                Circle()
+                //            .trim(from: 0, to: 0.1)
+                    .stroke(LinearGradient(colors: [.white.opacity(0), .white], startPoint: .center, endPoint: .bottomTrailing),
+                            style: StrokeStyle(lineWidth: 11, lineCap: .butt, lineJoin: .miter,
+                                               miterLimit: 0, dash: [dotLength, spaceLength], dashPhase: 0))
+                    .frame(maxWidth: .infinity)
+                    .rotationEffect(.degrees(-115.5))
+            }
+            
             Capsule()
                 .foregroundColor(.white)
                 .frame(width: 4, height: 20)
