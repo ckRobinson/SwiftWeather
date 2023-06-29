@@ -32,6 +32,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
                 self.saveUserLocation(lat: weatherDataModel.coord.lat, lon: weatherDataModel.coord.lon);
                 
                 self.userLocation = LocationCurrentWeatherData(rawData: weatherDataModel);
+                self.setTimeOfDay();
             }
             catch {
                 if let error = error as? APIError {
@@ -50,6 +51,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: lat, lon: lon)
                 self.userLocation = LocationCurrentWeatherData(rawData: weatherDataModel);
+                self.setTimeOfDay()
             }
             catch {
                 if let error = error as? APIError {
@@ -59,6 +61,12 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    private func setTimeOfDay() {
+        if let timeOfDay = self.userLocation?.locationInfo.locationTimeOfDay {
+            self.timeBasedBackgroundState = timeOfDay;
         }
     }
     
