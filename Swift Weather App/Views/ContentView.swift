@@ -39,7 +39,8 @@ struct ContentView: View {
         Group {
             if let userLocation = viewModel.userLocation {
                 NavigationLink(destination: {
-                    
+                    WeatherDetailsContentView(data: userLocation,
+                                              backgroundState: viewModel.timeBasedBackgroundState)
                 }, label: {
                     HStack {
                         LocationCurrentWeatherCardView(weatherData: userLocation)
