@@ -53,8 +53,12 @@ struct ContentView: View {
                         Text("Error")
                             .foregroundColor(.white)
                     case .locationError:
-                        Text("Location Error")
-                            .foregroundColor(.white)
+                        VStack {
+                            Text("Could not load location data. Please search for a location above or try again later.")
+                                .foregroundColor(.white)
+                                .padding()
+                            Spacer()
+                        }
                 }
             }
             .navigationTitle("Weather")
