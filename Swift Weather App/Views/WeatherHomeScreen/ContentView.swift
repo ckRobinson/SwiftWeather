@@ -29,25 +29,9 @@ struct ContentView: View {
                             ProgressView()
                         }
                     case .loaded:
-                        VStack {
+                        ScrollView {
                             weatherLocationCard()
                                 .padding(.top)
-                            Spacer()
-                            
-                            Button(action: {
-                                viewModel.updateUserLocation()
-                            }, label: {
-                                Image(systemName: "location")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .padding(8)
-                                    .background(backgroundColor)
-                                    .frame(width: 40)
-                                    .cornerRadius(15)
-                                    .padding(.bottom)
-                            })
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.trailing)
                         }
                     case .apiError:
                         Text("Error")
@@ -64,6 +48,26 @@ struct ContentView: View {
             .navigationTitle("Weather")
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar(.visible, for: .bottomBar)
+            .toolbarBackground(.hidden, for: .bottomBar)
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Spacer()
+                    Button(action: {
+                        viewModel.updateUserLocation()
+                        self.searchText = ""
+                    }, label: {
+                        Image(systemName: "location")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(5)
+                            .background(backgroundColor)
+                            .frame(width: 40)
+                            .cornerRadius(15)
+                    })
+                    .padding(.trailing)
+                }
+            }
         }
         .tint(.white)
         .onAppear() {
