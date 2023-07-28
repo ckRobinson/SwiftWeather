@@ -15,6 +15,7 @@ import CoreLocation
 
 protocol UserLocationManagerDelegate {
     func updatedUser(lat: Double, lon: Double) -> Void
+    func errorGettingLocation() -> Void;
 }
 
 class UserLocationManager: NSObject, CLLocationManagerDelegate {
@@ -49,10 +50,12 @@ class UserLocationManager: NSObject, CLLocationManagerDelegate {
             
         case .restricted:
             self.locationStatus = .restricted
+            self.delegate?.errorGettingLocation()
             break
             
         case .denied:
             self.locationStatus = .denied
+            self.delegate?.errorGettingLocation()
             break
             
         case .notDetermined:
