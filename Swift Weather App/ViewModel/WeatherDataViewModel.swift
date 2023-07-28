@@ -125,6 +125,11 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         UserDefaults.standard.set(lat, forKey: Constants.userDefaults_SavedLatitude);
         UserDefaults.standard.set(lon, forKey: Constants.userDefaults_SavedLongitude);
     }
+    
+    private func clearUserLocation() {
+        UserDefaults.standard.removeObject(forKey: Constants.userDefaults_SavedLatitude);
+        UserDefaults.standard.removeObject(forKey: Constants.userDefaults_SavedLongitude)
+    }
 }
 
 private struct Constants {
