@@ -33,6 +33,21 @@ struct ContentView: View {
                             weatherLocationCard()
                                 .padding(.top)
                             Spacer()
+                            
+                            Button(action: {
+                                viewModel.updateUserLocation()
+                            }, label: {
+                                Image(systemName: "location")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(8)
+                                    .background(backgroundColor)
+                                    .frame(width: 40)
+                                    .cornerRadius(15)
+                                    .padding(.bottom)
+                            })
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing)
                         }
                     case .apiError:
                         Text("Error")
