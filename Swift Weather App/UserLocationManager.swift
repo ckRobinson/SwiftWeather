@@ -31,7 +31,20 @@ class UserLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestUsersLocation() {
-        self.locationManager.requestWhenInUseAuthorization()
+        switch self.locationStatus {
+        case .notDetermined:
+            self.locationManager.requestWhenInUseAuthorization()
+            break
+        case .authorizedAlways, .authorizedWhenInUse:
+            self.locationManager.requestLocation()
+            break
+        case .denied, .restricted:
+            self.delegate?.errorGettingLocation()
+            break;
+        @unknown default:
+            self.delegate?.errorGettingLocation()
+                break;
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -43,7 +56,7 @@ class UserLocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .authorizedWhenInUse:
+        case .authorizedWhenInUse, .authorizedAlways:
             self.locationStatus = .authorizedWhenInUse
             self.locationManager.requestLocation()
             break
