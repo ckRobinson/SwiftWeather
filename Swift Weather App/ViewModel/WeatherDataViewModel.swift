@@ -109,6 +109,22 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         }
     }
     
+    @MainActor func updateUserLocation() {
+        
+        self.clearUserLocation()
+        
+        if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
+            /// Load "GPS" mock data in preview.
+            /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
+            self.userLocation = LocationCurrentWeatherData.mockData()
+            self.state = .loaded
+            return;
+        }
+        
+        self.clearUserLocation()
+        self.locationManager.requestUsersLocation()
+    }
+    
     
     /// User defaults tutorial:
     /// https://www.hackingwithswift.com/example-code/system/how-to-save-user-settings-using-userdefaults
