@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @StateObject var viewModel: WeatherDataViewModel = WeatherDataViewModel()
     @State var searchText = "";
+    @State var backgroundColor: Color = .blue;
+
     var body: some View {
         
         NavigationStack {
@@ -47,19 +49,18 @@ struct ContentView: View {
         .tint(.white)
         .onAppear() {
             viewModel.viewHasAppeared();
+            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: viewModel.timeBasedBackgroundState)
         }
         .searchable(text: $searchText, prompt: "Search for a city/state")
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
         }
+        .onChange(of: viewModel.timeBasedBackgroundState, perform: { value in
+            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: value)
+        })
     }
     
     private func weatherLocationCard() -> some View {
-        
-        var backgroundColor: Color = .blue;
-        if let locationInfo = self.viewModel.userLocation?.locationInfo {
-            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: viewModel.timeBasedBackgroundState)
-        }
         
         return Group {
             if let userLocation = viewModel.userLocation {
