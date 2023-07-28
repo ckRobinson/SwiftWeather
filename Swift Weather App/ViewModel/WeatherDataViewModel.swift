@@ -88,11 +88,9 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         self.state = .loading
         
         if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
-            /// Load "GPS" mock data in preview.
-            /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
-            self.userLocation = LocationCurrentWeatherData.mockData()
-            self.state = .loaded
-            return;
+            Task {
+                await self.setDebugGPS()
+            }
         }
         
         if self.savedLat == 0 && self.savedLon == 0 {
@@ -103,16 +101,25 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         }
     }
     
+    private func setDebugGPS() async {
+        
+        sleep(1)
+        /// Load "GPS" mock data in preview.
+        /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
+        self.userLocation = LocationCurrentWeatherData.mockData()
+        self.state = .loaded
+        return;
+    }
+    
     @MainActor func updateUserLocation() {
         
         self.clearUserLocation()
+        self.state = .loading
         
         if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
-            /// Load "GPS" mock data in preview.
-            /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
-            self.userLocation = LocationCurrentWeatherData.mockData()
-            self.state = .loaded
-            return;
+            Task {
+                await self.setDebugGPS()
+            }
         }
         
         self.clearUserLocation()
