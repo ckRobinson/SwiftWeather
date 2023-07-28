@@ -97,6 +97,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
             /// Load "GPS" mock data in preview.
             /// https://stackoverflow.com/questions/58759987/how-do-you-check-if-swiftui-is-in-preview-mode
             self.userLocation = LocationCurrentWeatherData.mockData()
+            self.state = .loaded
             return;
         }
         
