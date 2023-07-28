@@ -83,12 +83,6 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         }
     }
     
-    /// Delegate function, called by LocationManager
-    @MainActor func updatedUser(lat: Double, lon: Double) {
-        
-        self.updateWeatherData(lat: Float(lat), lon: Float(lon));
-    }
-    
     @MainActor func viewHasAppeared() {
         
         self.state = .loading
@@ -125,13 +119,22 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
         self.locationManager.requestUsersLocation()
     }
     
+    // MARK: - Location Manager Delegate functions
+    @MainActor func updatedUser(lat: Double, lon: Double) {
+        
+        self.updateWeatherData(lat: Float(lat), lon: Float(lon));
+    }
     
+    func errorGettingLocation() {
+        self.state = .locationError
+    }
+    
+    // MARK: - User Default functions
     /// User defaults tutorial:
     /// https://www.hackingwithswift.com/example-code/system/how-to-save-user-settings-using-userdefaults
     private func updateUserDefaults() {
         let lat = UserDefaults.standard.float(forKey: Constants.userDefaults_SavedLatitude);
         let lon = UserDefaults.standard.float(forKey: Constants.userDefaults_SavedLongitude);
-//        print("Loaded -> Lat: \(lat), Lon: \(lon)");
         
         self.savedLat = lat;
         self.savedLon = lon;
