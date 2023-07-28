@@ -38,7 +38,7 @@ struct WeatherDetailsContentView: View {
 //                    .padding(.horizontal)
 //                    .padding(.bottom, 30)
 //
-                CurrentDayAdditionalDataView(data: data)
+                CurrentDayAdditionalDataView(data: data, timeOfDay: self.backgroundState)
                     .padding(.horizontal)
             }
         }
