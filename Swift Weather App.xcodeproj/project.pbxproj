@@ -31,6 +31,7 @@
 		7E1D05462A4BC79600ED114F /* WeatherDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05452A4BC79600ED114F /* WeatherDetailsContentView.swift */; };
 		7E1D05482A4D040300ED114F /* InfoCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D05472A4D040300ED114F /* InfoCellViews.swift */; };
 		7E1D054C2A4E055F00ED114F /* Swift_Weather_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D054B2A4E055F00ED114F /* Swift_Weather_AppApp.swift */; };
+		7E57ECB42A74672900E1E041 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57ECB32A74672900E1E041 /* Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		7E1D05452A4BC79600ED114F /* WeatherDetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsContentView.swift; sourceTree = "<group>"; };
 		7E1D05472A4D040300ED114F /* InfoCellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellViews.swift; sourceTree = "<group>"; };
 		7E1D054B2A4E055F00ED114F /* Swift_Weather_AppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Swift_Weather_AppApp.swift; path = "Swift Weather App/Swift_Weather_AppApp.swift"; sourceTree = SOURCE_ROOT; };
+		7E57ECB32A74672900E1E041 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		7E0E909C2A489E85001C8ACC /* Swift Weather App */ = {
 			isa = PBXGroup;
 			children = (
+				7E57ECB02A74670900E1E041 /* Common */,
 				7E1D05182A4A357C00ED114F /* Swift-Weather-App-Info.plist */,
 				7E1D050E2A48CC1300ED114F /* Views */,
 				7E0E90CD2A48A45C001C8ACC /* ViewModel */,
@@ -274,6 +277,14 @@
 				7E0E90C82A489FBD001C8ACC /* CurrentWeatherApiModel.swift */,
 			);
 			path = ApiModels;
+			sourceTree = "<group>";
+		};
+		7E57ECB02A74670900E1E041 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7E57ECB32A74672900E1E041 /* Style.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,6 +436,7 @@
 				7E0E90CC2A48A270001C8ACC /* WeatherFetchService.swift in Sources */,
 				7E1D054C2A4E055F00ED114F /* Swift_Weather_AppApp.swift in Sources */,
 				7E1D05482A4D040300ED114F /* InfoCellViews.swift in Sources */,
+				7E57ECB42A74672900E1E041 /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,7 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -565,7 +577,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -583,6 +595,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Weather App/Preview Content\"";
+				DEVELOPMENT_TEAM = A6297323L3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Swift-Weather-App-Info.plist";
@@ -592,6 +605,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,6 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Weather App/Preview Content\"";
+				DEVELOPMENT_TEAM = A6297323L3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Swift-Weather-App-Info.plist";
@@ -622,6 +637,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
