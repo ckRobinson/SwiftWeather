@@ -15,6 +15,10 @@ struct CurrentDayAdditionalDataView: View {
         self.data = data
         self.backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: self.data.locationInfo.locationTimeOfDay);
     }
+    init(data: LocationCurrentWeatherData, timeOfDay: TimeOfDay) {
+        self.data = data
+        self.backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: timeOfDay);
+    }
     
     var body: some View {
         let grid: [GridItem] = [
