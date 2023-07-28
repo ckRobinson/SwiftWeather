@@ -17,19 +17,37 @@ struct ContentView: View {
             ZStack {
                 WeatherBackgroundView(backgroundState: viewModel.timeBasedBackgroundState)
                 
-                VStack {
-                    weatherLocationCard()
-                    Spacer()
+                switch viewModel.state {
+                    case .initial:
+                        EmptyView()
+                    case .loading:
+                        VStack {
+                            Text("Loading...")
+                                .foregroundColor(.white)
+                            ProgressView()
+                        }
+                    case .loaded:
+                        VStack {
+                            weatherLocationCard()
+                                .padding(.top)
+                            Spacer()
+                        }
+                    case .apiError:
+                        Text("Error")
+                            .foregroundColor(.white)
+                    case .locationError:
+                        Text("Location Error")
+                            .foregroundColor(.white)
                 }
             }
             .navigationTitle("Weather")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
-        .tint(.black)
+        .tint(.white)
         .onAppear() {
             viewModel.viewHasAppeared();
         }
-        /// Searchable tutorial:
-        /// https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-a-search-bar-to-filter-your-data
         .searchable(text: $searchText, prompt: "Search for a city/state")
         .onSubmit(of: .search) {
             viewModel.fetchWeatherBy(search: searchText)
@@ -40,7 +58,7 @@ struct ContentView: View {
         
         var backgroundColor: Color = .blue;
         if let locationInfo = self.viewModel.userLocation?.locationInfo {
-            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: locationInfo.locationTimeOfDay);
+            backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: viewModel.timeBasedBackgroundState)
         }
         
         return Group {
