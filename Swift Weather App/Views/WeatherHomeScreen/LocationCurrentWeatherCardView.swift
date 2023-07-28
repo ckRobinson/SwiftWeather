@@ -89,7 +89,7 @@ struct LocationCurrentWeatherCardView_Previews: PreviewProvider {
             LocationCurrentWeatherCardView()
                 .background(.blue)
                 .cornerRadius(15)
-                .shadow(radius: 1, x: 1, y: 1)
+                .applyShadow()
                 .padding()
         }
     }

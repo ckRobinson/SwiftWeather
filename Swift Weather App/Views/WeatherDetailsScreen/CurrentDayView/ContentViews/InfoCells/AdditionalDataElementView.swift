@@ -47,7 +47,7 @@ struct AdditionalDataElementView: View {
         .frame(minWidth: 180, maxWidth: 180)
         .background(self.backgroundColor.opacity(0.5))
         .cornerRadius(15)
-        .shadow(radius: 1, x: 2, y: 2)
+        .applyShadow()
     }
 }
 

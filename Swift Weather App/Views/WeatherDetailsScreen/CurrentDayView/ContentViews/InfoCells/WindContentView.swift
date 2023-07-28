@@ -103,7 +103,7 @@ struct WindContentView: View {
                     .padding(.top, -10)
             }
             .foregroundColor(.white)
-            .shadow(radius: 1)
+            .applyShadow()
             .rotationEffect(.degrees(windDirectionDegrees))
         }
     }

@@ -53,6 +53,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Spacer()
+                    
                     Button(action: {
                         viewModel.updateUserLocation()
                         self.searchText = ""
@@ -64,8 +65,8 @@ struct ContentView: View {
                             .background(backgroundColor)
                             .frame(width: 40)
                             .cornerRadius(15)
+                            .applyShadow()
                     })
-                    .padding(.trailing)
                 }
             }
         }
@@ -101,7 +102,7 @@ struct ContentView: View {
                     }
                     .background(backgroundColor)
                     .cornerRadius(15)
-                    .shadow(radius: 1, x: 1, y: 1)
+                    .applyShadow()
                     .padding(.horizontal)
                 })
             }
