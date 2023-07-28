@@ -63,33 +63,25 @@ private struct Preview: View {
                 Spacer()
                 HStack {
                     Button(action: { backgroundState = .morning }, label: {
-                        Group {
-                            Text("Morning")
-                        }
+                        Text("Morning")
                         .padding()
                         .background(.white)
                         .cornerRadius(15)
                     })
                     Button(action: { backgroundState = .day }, label: {
-                        Group {
-                            Text("Day")
-                        }
+                        Text("Day")
                         .padding()
                         .background(.white)
                         .cornerRadius(15)
                     })
                     Button(action: { backgroundState = .evening }, label: {
-                        Group {
-                            Text("Evening")
-                        }
+                        Text("Evening")
                         .padding()
                         .background(.white)
                         .cornerRadius(15)
                     })
                     Button(action: { backgroundState = .night }, label: {
-                        Group {
-                            Text("Night")
-                        }
+                        Text("Night")
                         .padding()
                         .background(.white)
                         .cornerRadius(15)

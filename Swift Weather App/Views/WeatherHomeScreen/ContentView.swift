@@ -52,6 +52,38 @@ struct ContentView: View {
             .toolbarBackground(.hidden, for: .bottomBar)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
+                    
+                    if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
+                        Button(action: { viewModel.timeBasedBackgroundState = .morning }, label: {
+                            Text("Morning")
+                            .padding(5)
+                            .background(.white)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                        })
+                        Button(action: { viewModel.timeBasedBackgroundState = .day }, label: {
+                            Text("Day")
+                            .padding(5)
+                            .background(.white)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                        })
+                        Button(action: { viewModel.timeBasedBackgroundState = .evening }, label: {
+                            Text("Evening")
+                            .padding(5)
+                            .background(.white)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                        })
+                        Button(action: { viewModel.timeBasedBackgroundState = .night }, label: {
+                            Text("Night")
+                            .padding(5)
+                            .background(.white)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                        })
+                    }
+                    
                     Spacer()
                     
                     Button(action: {
