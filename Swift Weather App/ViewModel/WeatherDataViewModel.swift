@@ -7,11 +7,20 @@
 
 import Foundation
 
+enum WeatherDataViewState {
+    case initial
+    case loading
+    case loaded
+    case apiError
+    case locationError
+}
 
 class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     
     @Published var userLocation: LocationCurrentWeatherData?;
     @Published var timeBasedBackgroundState: TimeOfDay = .day;
+    @Published var state: WeatherDataViewState = .initial;
+    
     let weatherDataService: WeatherFetchService = WeatherFetchService();
     let locationManager: UserLocationManager = UserLocationManager();
 
@@ -19,7 +28,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     var savedLat: Float = 0;
     
     init() {
-        self.timeBasedBackgroundState = TimeOfDay.parseDateToBackgroundState(date: Date())    
+        self.timeBasedBackgroundState = TimeOfDay.parseDateToBackgroundState(date: Date())
         self.locationManager.delegate = self;
         
         self.updateUserDefaults();
@@ -33,6 +42,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
                 
                 self.userLocation = LocationCurrentWeatherData(rawData: weatherDataModel);
                 self.setTimeOfDay();
+                self.state = .loaded
             }
             catch {
                 if let error = error as? APIError {
@@ -41,17 +51,19 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
                 else {
                     print(error.localizedDescription)
                 }
+                self.state = .apiError
             }
         }
     }
 
-    @MainActor func updateWeatherData(lat: Float, lon: Float) {
+    @MainActor private func updateWeatherData(lat: Float, lon: Float) {
         
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(lat: lat, lon: lon)
                 self.userLocation = LocationCurrentWeatherData(rawData: weatherDataModel);
                 self.setTimeOfDay()
+                self.state = .loaded
             }
             catch {
                 if let error = error as? APIError {
@@ -60,6 +72,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
                 else {
                     print(error.localizedDescription)
                 }
+                self.state = .locationError
             }
         }
     }
@@ -77,6 +90,8 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     }
     
     @MainActor func viewHasAppeared() {
+        
+        self.state = .loading
         
         if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
             /// Load "GPS" mock data in preview.
