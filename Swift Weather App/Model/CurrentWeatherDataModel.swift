@@ -81,7 +81,7 @@ struct LocationInfo {
         
         let formatter = DateFormatter();
         formatter.timeZone = TimeZone(secondsFromGMT: timezoneOffset);
-        formatter.dateFormat = "HH:mm a";
+        formatter.dateFormat = "h:mm a";
         
         let formattedTime = formatter.string(from: localDateTime);
         
