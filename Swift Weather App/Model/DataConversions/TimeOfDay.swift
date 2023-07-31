@@ -40,28 +40,36 @@ enum TimeOfDay {
         let currentHour24hClock = formatter.string(from: date)
         
         switch(currentHour24hClock) {
+        case "21":
+            fallthrough;
+        case "22":
+            fallthrough;
+        case "23":
+            fallthrough;
+        case "24":
+            fallthrough;
         case "00":
             fallthrough;
-        case "1":
+        case "01":
             fallthrough;
-        case "2":
+        case "02":
             fallthrough;
-        case "3":
+        case "03":
             fallthrough;
-        case "4":
+        case "04":
             fallthrough;
-        case "5":
+        case "05":
             return .night;
-        case "6":
+        case "06":
             fallthrough;
-        case "7":
+        case "07":
             fallthrough;
-        case "8":
+        case "08":
             return .morning
-        case "9":
+        case "09":
             fallthrough;
         case "10":
-            fallthrough
+            fallthrough;
         case "11":
             fallthrough;
         case "12":
@@ -71,25 +79,17 @@ enum TimeOfDay {
         case "14":
             fallthrough;
         case "15":
-            return .day
+            fallthrough;
         case "16":
-            fallthrough
+            fallthrough;
         case "17":
-            fallthrough
+            return .day
         case "18":
-            return .evening
+            fallthrough;
         case "19":
-            fallthrough
+            fallthrough;
         case "20":
-            fallthrough
-        case "21":
-            fallthrough
-        case "22":
-            fallthrough
-        case "23":
-            fallthrough
-        case "24":
-            return .night
+            return .evening;
         default:
             break;
         }
