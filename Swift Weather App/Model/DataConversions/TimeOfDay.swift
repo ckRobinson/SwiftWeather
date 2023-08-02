@@ -17,7 +17,7 @@ enum TimeOfDay {
     public static func timeOfDayToCardBGColor(timeOfDay: TimeOfDay) -> Color {
         switch(timeOfDay) {
         case .day:
-            return .blue;
+            return Color("cardDayColor");
         case .morning:
             return Color("cardMorningColor");
         case .evening:

@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @StateObject var viewModel: WeatherDataViewModel = WeatherDataViewModel()
     @State var searchText = "";
-    @State var backgroundColor: Color = .blue;
+    @State var backgroundColor: Color = Color("cardDayColor")
 
     var body: some View {
         
