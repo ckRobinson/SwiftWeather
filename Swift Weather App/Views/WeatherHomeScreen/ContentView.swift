@@ -22,7 +22,7 @@ struct ContentView: View {
                 switch viewModel.state {
                     case .initial:
                         EmptyView()
-                    case .loading:
+                    case .searching, .loadingGPS:
                         VStack {
                             Text("Loading...")
                                 .foregroundColor(.white)
@@ -34,7 +34,7 @@ struct ContentView: View {
                                 .padding(.top)
                         }
                     case .apiError:
-                        Text("Error")
+                        Text("No results found. Please try again.")
                             .foregroundColor(.white)
                     case .locationError:
                         VStack {

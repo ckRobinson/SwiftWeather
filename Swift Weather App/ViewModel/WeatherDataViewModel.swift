@@ -9,7 +9,8 @@ import Foundation
 
 enum WeatherDataViewState {
     case initial
-    case loading
+    case searching
+    case loadingGPS
     case loaded
     case apiError
     case locationError
@@ -35,6 +36,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     }
 
     @MainActor func fetchWeatherBy(search: String) {
+        self.state = .searching
         Task {
             do {
                 let weatherDataModel: WeatherApiDataModel = try await weatherDataService.fetchWeatherBy(search: search)
@@ -85,7 +87,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     
     @MainActor func viewHasAppeared() {
         
-        self.state = .loading
+        self.state = .searching
         
         if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
             Task {
@@ -114,7 +116,7 @@ class WeatherDataViewModel: ObservableObject, UserLocationManagerDelegate {
     @MainActor func updateUserLocation() {
         
         self.clearUserLocation()
-        self.state = .loading
+        self.state = .loadingGPS
         
         if(ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1") {
             Task {
