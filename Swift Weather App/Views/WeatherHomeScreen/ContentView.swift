@@ -29,10 +29,7 @@ struct ContentView: View {
                             ProgressView()
                         }
                     case .loaded:
-                        ScrollView {
-                            weatherLocationCard()
-                                .padding(.top)
-                        }
+                        CardList(viewModel: viewModel, searchText: searchText, backgroundColor: backgroundColor)
                     case .apiError:
                         Text("No results found. Please try again.")
                             .foregroundColor(.white)
@@ -114,6 +111,31 @@ struct ContentView: View {
         .onChange(of: viewModel.timeBasedBackgroundState, perform: { value in
             backgroundColor = TimeOfDay.timeOfDayToCardBGColor(timeOfDay: value)
         })
+    }
+}
+
+struct CardList: View {
+    @ObservedObject var viewModel: WeatherDataViewModel;
+    var searchText = "";
+    var backgroundColor: Color = Color("cardDayColor")
+    @Environment(\.dismissSearch) var dismissSearch
+    @Environment(\.isSearching) var isSearching
+    
+    var body: some View {
+        ScrollView {
+            weatherLocationCard()
+                .padding(.top)
+        }
+        .onChange(of: viewModel.state, perform: { stateValue in
+            if (isSearching && stateValue == .loaded) || stateValue == .loadingGPS {
+                dismissSearch()
+            }
+        })
+        .onAppear() {
+            if isSearching {
+                dismissSearch()
+            }
+        }
     }
     
     private func weatherLocationCard() -> some View {
