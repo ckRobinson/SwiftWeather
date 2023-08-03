@@ -21,25 +21,13 @@ struct ContentView: View {
                 
                 switch viewModel.state {
                     case .initial:
-                        EmptyView()
-                    case .searching, .loadingGPS:
                         VStack {
                             Text("Loading...")
                                 .foregroundColor(.white)
                             ProgressView()
                         }
-                    case .loaded:
+                    default:
                         CardList(viewModel: viewModel, searchText: searchText, backgroundColor: backgroundColor)
-                    case .apiError:
-                        Text("No results found. Please try again.")
-                            .foregroundColor(.white)
-                    case .locationError:
-                        VStack {
-                            Text("Could not load location data. Please search for a location above or try again later.")
-                                .foregroundColor(.white)
-                                .padding()
-                            Spacer()
-                        }
                 }
             }
             .navigationTitle("Weather")
@@ -122,9 +110,30 @@ struct CardList: View {
     @Environment(\.isSearching) var isSearching
     
     var body: some View {
-        ScrollView {
-            weatherLocationCard()
-                .padding(.top)
+        Group {
+            switch viewModel.state {
+                case .initial, .searching, .loadingGPS:
+                    VStack {
+                        Text("Loading...")
+                            .foregroundColor(.white)
+                        ProgressView()
+                    }
+                case .loaded:
+                    ScrollView {
+                        weatherLocationCard()
+                            .padding(.top)
+                    }
+                case .apiError:
+                    Text("No results found. Please try again.")
+                        .foregroundColor(.white)
+                case .locationError:
+                    VStack {
+                        Text("Could not load location data. Please search for a location above or try again later.")
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
+                    } 
+            }
         }
         .onChange(of: viewModel.state, perform: { stateValue in
             if (isSearching && stateValue == .loaded) || stateValue == .loadingGPS {
